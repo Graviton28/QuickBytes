@@ -73,7 +73,7 @@ Quickbytes are tutorials designed to help CARC users.
 These slides were used in CARC workshops. They are provided for your convenience. Github does a poor job rendering PDFs. We recomment downloading the presentations.
 
   [Current workshop schedule](https://carc.unm.edu/education--training/workshops-and-seminars.html)
-    * [Beginner Introduction: Basic Linux and Interactive SLURM](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/BeginnerIntro.pdf)
+    * [Beginner Introduction: Basic Linux and Interactive SLURM](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopBeginner2025-0.2.pdf)
     * [Intermediate Introduction: High Performance Computing and Batch SLURM /w Python](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntermediateIntro.pdf)
     * [Intermediate Introduction: High Performance Computing and Batch SLURM /w FORTRAN](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopIntermediate2024-0.1-FORTRAN.pdf)
     * [Biology 4/519: Biodiversity Informatics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/BIOL419_519.pdf)
