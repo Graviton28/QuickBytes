@@ -79,7 +79,7 @@ These slides were used in CARC workshops. They are provided for your convenience
     * [Biology 4/519: Biodiversity Informatics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/BIOL419_519.pdf)
     * [Chemistry 567/Physics 581/Electrical and Computer Engineering 595: Quantum Computing for Quantum Chemistry](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CHEM567.pdf)
     * [Computer Science 4/542: Introduction to Parallel Processing](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CS442.pdf)
-    * [Intermediate Introduction with Radio Astronomy and CASA]{https://github.com/UNM-CARC/QuickBytes/blob/master/IntermediateIntroToCARCWorkshopCASA.pdf}
+    * [Intermediate Introduction with Radio Astronomy and CASA](https://github.com/UNM-CARC/QuickBytes/blob/master/IntermediateIntroToCARCWorkshopCASA.pdf)
     * [Computer Science 523: Complex Adaptive Systems](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CS523.pdf)
     * [Computer Science/Math 471: Introduction to Scientific Computing](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CS_Math_471.pdf)
     * [Environmental Sciences 352: Global Climate Change](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/ENVS352.pdf)
