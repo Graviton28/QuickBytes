@@ -94,7 +94,9 @@ These slides were used in CARC workshops. They are provided for your convenience
     * [Parallel Processing with MPI and SLURM 50 min version](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CS442_50min.pdf)
     * [SLURM and Gaussian 1 hr version](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntermediateIntroToCARCWorkshopGaussian_1hr.pdf)
     *  [Intermediate SLURM and StarCCM](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopIntermediate2024-0.2-StarCCM.pdf)
-    * [Intermediate SLURM and Machine Learning](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntermediateIntroToCARCWorkshopMachineLearning.pdf) 
+    * [Intermediate SLURM and Machine Learning](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntermediateIntroToCARCWorkshopMachineLearning.pdf)
+    *  [Intro to CARC with Quantum Computing](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithQuantumComputing2025-0.1.pdf)
+    * [Intro to CARC with Computational Fluid Dynamics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamics2025-0.1.pdf) 
     
       
       
