@@ -75,7 +75,7 @@ These slides were used in CARC workshops. They are provided for your convenience
 
   [Current workshop schedule](https://carc.unm.edu/education--training/workshops-and-seminars.html)
     * [Beginner Introduction: Basic Linux and Interactive SLURM](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopBeginner2025-0.2.pdf)
-    * [Intermediate Introduction: High Performance Computing and Batch SLURM /w Python](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopIntermediate2025-0.4_Zoom_Version.pdf)
+    * [Intermediate Introduction: High Performance Computing and Batch SLURM /w Python](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopIntermediate2025-0.5_Zoom_Version.pdf)
     * [Intermediate Introduction: High Performance Computing and Batch SLURM /w FORTRAN](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopIntermediate2024-0.1-FORTRAN.pdf)
     * [Chemistry 525: Structural Biology - Intro to CARC with Crystallography](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithCrystallography2025-0.1.pdf)
     * [Biology 4/519: Biodiversity Informatics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/BIOL419_519.pdf)
