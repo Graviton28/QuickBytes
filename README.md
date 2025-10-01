@@ -80,6 +80,7 @@ These slides were used in CARC workshops. They are provided for your convenience
     * [Chemistry 525: Structural Biology - Intro to CARC with Crystallography](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithCrystallography2025-0.1.pdf)
     * [Biology 4/519: Biodiversity Informatics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/BIOL419_519.pdf)
     * [Chemistry 567/Physics 581/Electrical and Computer Engineering 595: Quantum Computing for Quantum Chemistry](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CHEM567.pdf)
+    * [Slurm and Parallel Processing with Arrays and MPI](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopIntermediate2025-0.4.pdf)
     * [Computer Science 4/542: Introduction to Parallel Processing](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CS442.pdf)
     * [Computer Science 523: Complex Adaptive Systems](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CS523.pdf)
     * [Advanced Astronomy with MESA Star](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopMesaStar.pdf)
