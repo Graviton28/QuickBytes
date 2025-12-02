@@ -24,13 +24,13 @@ For larger files it is recommended you use one of several programs implemented i
 Transfer from local machine to CARC:
 
 ```bash
-scp /your-file your-username@wheeler.alliance.unm.edu:target-directory/
+scp /your-file your-username@easley.alliance.unm.edu:target-directory/
 ```
 
 Transfer from CARC to local machine:
 
 ```bash
-scp your-username@wheeler.alliance.unm.edu:your-file /target-directory/
+scp your-username@ealsey.alliance.unm.edu:your-file /target-directory/
 ```
 
 #### Remote Sync (RSYNC)
@@ -38,12 +38,12 @@ scp your-username@wheeler.alliance.unm.edu:your-file /target-directory/
 Transfer from local machine to CARC
 
 ```bash
-rsync -vhatP /your-file your-username@wheeler.alliance.unm.edu:target-directory
+rsync -vhatP /your-file your-username@easley.alliance.unm.edu:target-directory
 ```
 Transfer from CARC to local machine
 
 ```bash
-rsync -vhatP your-username@wheeler.alliance.unm.edu:your-file /target-directory/
+rsync -vhatP your-username@easley.alliance.unm.edu:your-file /target-directory/
 ```
 
 The `-vhatP` flag are instructions to rsync print out the progress of the transfer verbosely and human-readable.
@@ -53,13 +53,13 @@ The `-vhatP` flag are instructions to rsync print out the progress of the transf
 Transfer from local machine to CARC
 
 ```bash
-bbcp /your-file your-username@wheeler.alliance.unm.edu:target-directory/
+bbcp /your-file your-username@easley.alliance.unm.edu:target-directory/
 ```
 
 Transfer from CARC to local machine
 
 ```bash
-bbcp your-username@wheeler.alliance.unm.edu:your-file /target-directory/
+bbcp your-username@easley.alliance.unm.edu:your-file /target-directory/
 ```
 
 As you can see, the syntax for using the various programs is very similar, however, the options for advanced usage are unique to each program. The examples provided above are for very basic data transfers, but you should refer to the links provided, or for the CLI options use the command `man programname`, in order to optimize each for maximum data transfer efficiency and speed. The necessity for transfer optimization increases as file size increases.
