@@ -1,40 +1,39 @@
-# Example PBS Scripts
+# Example Slurm Scripts
 
-### PBS Hello World:
+### Slurm Hello World:
 
-This example uses the "Bash” shell to print a simple “Hello World”
-message. Note that it specifies the shell with the `-S` option. If you
-do not specify a shell using the `-S` option (either inside the PBS
-script or as an argument to `qsub`), then your default shell will be used.
-Since this script uses built-in Bash commands no software modules are
-loaded. That will be introduced in the next PBS script.
+This example uses the Bash shell to print a simple “Hello World” message.
+In Slurm, the shell is specified by the shebang line at the top of the script ```#!/bin/bash```
+If you do not specify a shell, then your default shell will be used.
+Since this script uses only built-in Bash commands, no software modules are loaded. 
+Module usage will be introduced in the next Slurm example.
 
 ```bash
 #!/bin/bash
-## Introduction for writing a PBS script
+## Introduction for writing a Slurm script
 ## The next lines specify what resources you are requesting.
 ## Starting with 1 node, 8 processors per node, and 2 hours of walltime. 
-## Setup your qsub flags
-#PBS -l walltime=2:00:00
-#PBS -l nodes=1:ppn=8
-#PBS -N my_job
-#PBS -M myemailaddress@unm.edu
-#PBS -m bae
-## All other instructions to TORQUE are here as well and are preceded by a single #, note that normal comments can also be preceded by a single #
-## Specify the shell to be bash
-#PBS -S /bin/bash
-## Change to directory the PBS script was submitted from
-cd $PBS_O_WORKDIR
+## Setup your slurm flags
+#SBATCH --job-name=my_job
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --time=02:00:00
+#SBATCH --mail-user=myemailaddress@unm.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
+
+## Change to directory the Slurm script was submitted from
+cd $SLURM_SUBMIT_DIR
 ## Print out a hello message indicating the host this is running on
 export THIS_HOST=$(hostname)
-echo Hello World from host $THIS_HOST
+echo "Hello World from host $THIS_HOST"
 ####################################################
 ```
 
-Note that the `ppn` (processors per node) value must always be less than
-or equal to the number of physical cores available on each node of the
-system on which you are running and is machine specific. For example, on
-Wheeler, `ppn` should be <=8, however, we recommend you always request
+Note that the number of tasks you request per node in Slurm, specified with
+```--ntasks-per-node```, must always be less than or equal to the number of 
+physical CPU cores available on the node where your job will run. 
+This value is machine-specific. For example, on
+Ealey, ```--ntasks-per-node``` should be <=64, however, we recommend you always request
 the maximum number of processors per node to avoid multiple jobs on one
 node that have to share memory. For more information see CARC systems
 information.
@@ -48,19 +47,20 @@ information.
 ## The Center for Advanced Research Computing
 ## at The University of New Mexico
 ####################################################
-## Setup your qsub flags
-#PBS -l walltime=2:00:00
-#PBS -l nodes=1:ppn=8
-#PBS -N my_job
-#PBS -M myemailaddress@unm.edu
-#PBS -m bae
-# load the environment module to use OpenMPI built with the Intel compilers
-module load openmpi-3.1.1-intel-18.0.2-hlc45mq 
-# Change to the directory where the PBS script was submitted from
-cd $PBS_O_WORKDIR
+## Setup your Slurm flags
+#SBATCH --job-name=my_job
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --time=02:00:00
+#SBATCH --mail-user=myemailaddress@unm.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
+# load the environment module to use OpenMPI
+module load openmpi 
+# Change to the directory where the Slurm script was submitted from
+cd $SLURM_SUBMIT_DIR
 # run the command "hostname" on ever CPU. Hostname prints the name of the computer is it running on.
-# $PBS_NP is the total number of CPUs requested. In this case 1 nodes x 8 CPUS per node = 8
-mpirun -np $PBS_NP hostname
+# $SLURM_NTASKS is the total number of CPUs requested. In this case 1 nodes x 8 CPUS per node = 8
+mpirun -np $SLURM_NTASKS hostname
 ####################################################
 ```
 
@@ -73,20 +73,19 @@ mpirun -np $PBS_NP hostname
 ## The Center for Advanced Research Computing
 ## at The University of New Mexico
 ####################################################
-## Setup your qsub flags
-#PBS -l walltime=2:00:00
-#PBS -l nodes=4:ppn=8
-#PBS -N my_job
-#PBS -M myemailaddress@unm.edu
-#PBS -m bae
-# Change to directory the PBS script was submitted from
-cd $PBS_O_WORKDIR
-# load the environment module to use OpenMPI built with the Intel compilers
-module load openmpi-3.1.1-intel-18.0.2-hlc45mq 
-# print out a hello message from each of the processors on this host
-# run the command "hostname" on ever CPU. Hostname prints the name of the computer is it running on.
-# $PBS_NP is the total number of CPUs requested. In this case 4 nodes x 8 CPUS per node = 32
-# Since we are running on multiple nodes (computers) we have to tell mpirun the names of the nodes we were assigned. Those names are in $PBS_NODEFILE.
-mpirun -np $PBS_NP -machinefile $PBS_NODEFILE hostname
+## Setup your Slurm flags
+#SBATCH --job-name=my_job
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=8
+#SBATCH --time=02:00:00
+#SBATCH --mail-user=myemailaddress@unm.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
+# Change to directory the Slurm script was submitted from
+cd $SLURM_O_WORKDIR
+# load the environment module to use OpenMPI
+module load openmpi
+## Print a hello message from each of the processors on all assigned nodes
+## $SLURM_NTASKS is the total number of MPI tasks: 4 nodes x 8 tasks per node = 32
+mpirun -np $SLURM_NTASKS hostname
 ###################################################
 ```
