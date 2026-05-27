@@ -1,45 +1,33 @@
-# Example PBS Scripts
+# Example SBATCH Scripts
 
-### PBS Hello World:
-
-This example uses the "Bash” shell to print a simple “Hello World”
-message. Note that it specifies the shell with the `-S` option. If you
-do not specify a shell using the `-S` option (either inside the PBS
-script or as an argument to `qsub`), then your default shell will be used.
-Since this script uses built-in Bash commands no software modules are
-loaded. That will be introduced in the next PBS script.
+### SBATCH Hello World
+This example uses the "Bash" shell to print a simple "Hello World" message. Since this script uses built-in Bash commands, no software modules are loaded. That will be introduced in the next SBATCH script.
 
 ```bash
 #!/bin/bash
-## Introduction for writing a PBS script
+## Introduction for writing an SBATCH script
 ## The next lines specify what resources you are requesting.
-## Starting with 1 node, 8 processors per node, and 2 hours of walltime. 
-## Setup your qsub flags
-#PBS -l walltime=2:00:00
-#PBS -l nodes=1:ppn=8
-#PBS -N my_job
-#PBS -M myemailaddress@unm.edu
-#PBS -m bae
-## All other instructions to TORQUE are here as well and are preceded by a single #, note that normal comments can also be preceded by a single #
-## Specify the shell to be bash
-#PBS -S /bin/bash
-## Change to directory the PBS script was submitted from
-cd $PBS_O_WORKDIR
+## Starting with 1 node, 8 processors per node, and 5 minutes of walltime.
+## Setup your sbatch flags
+#SBATCH --time=00:05:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --job-name=hello
+#SBATCH --mail-user=myemailaddress@unm.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --output=hello.o%j
+#SBATCH --error=hello.e%j
+## All other instructions to SLURM are here as well and are preceded by a single #. Note that a single # can also precede normal comments
+## Change to the directory the SBATCH script was submitted from
+cd $SLURM_SUBMIT_DIR
 ## Print out a hello message indicating the host this is running on
-export THIS_HOST=$(hostname)
-echo Hello World from host $THIS_HOST
-####################################################
+echo "Hello World from host $(hostname)."
 ```
 
-Note that the `ppn` (processors per node) value must always be less than
-or equal to the number of physical cores available on each node of the
-system on which you are running and is machine specific. For example, on
-Wheeler, `ppn` should be <=8, however, we recommend you always request
-the maximum number of processors per node to avoid multiple jobs on one
-node that have to share memory. For more information see CARC systems
-information.
+Note that the `--ntasks-per-node` value must always be less than or equal to the number of physical cores available on each node of the system on which you are running and is machine-specific. We recommend that you always request the maximum number of processors per node to avoid multiple jobs on a single node that shares memory. For more information, please see the CARC systems information.
 
-### Multi-processor example script:
+### Multi-processor example script
+This example builds on the previous script by loading an OpenMPI software module and using `mpirun` to run the job across all requested processors.
 
 ```bash
 #!/bin/bash
@@ -48,45 +36,53 @@ information.
 ## The Center for Advanced Research Computing
 ## at The University of New Mexico
 ####################################################
-## Setup your qsub flags
-#PBS -l walltime=2:00:00
-#PBS -l nodes=1:ppn=8
-#PBS -N my_job
-#PBS -M myemailaddress@unm.edu
-#PBS -m bae
+## Setup your sbatch flags
+#SBATCH --time=00:05:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --job-name=helloworld_parallel
+#SBATCH --mail-user=myemailaddress@unm.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --output=helloworld_parallel.o%j
+#SBATCH --error=helloworld_parallel.e%j
 # load the environment module to use OpenMPI built with the Intel compilers
-module load openmpi-3.1.1-intel-18.0.2-hlc45mq 
-# Change to the directory where the PBS script was submitted from
-cd $PBS_O_WORKDIR
-# run the command "hostname" on ever CPU. Hostname prints the name of the computer is it running on.
-# $PBS_NP is the total number of CPUs requested. In this case 1 nodes x 8 CPUS per node = 8
-mpirun -np $PBS_NP hostname
+module load openmpi-3.1.1-intel-18.0.2-hlc45mq
+# Change to the directory where the SBATCH script was submitted from
+cd $SLURM_SUBMIT_DIR
+# run the echo command on every CPU. Hostname prints the name of the computer it is running on.
+# $SLURM_NTASKS is the total number of CPUs requested. In this case 1 node x 8 CPUs per node = 8
+mpirun -np $SLURM_NTASKS echo "Hello World from host $(hostname)"
 ####################################################
 ```
 
-### Multi-node example script:
+### Multi-node example script
+This example extends the previous script to run across multiple nodes.
 
 ```bash
 #!/bin/bash
-## Introductory Example 
+## Introductory Example
 ## Copyright (c) 2018
 ## The Center for Advanced Research Computing
 ## at The University of New Mexico
 ####################################################
-## Setup your qsub flags
-#PBS -l walltime=2:00:00
-#PBS -l nodes=4:ppn=8
-#PBS -N my_job
-#PBS -M myemailaddress@unm.edu
-#PBS -m bae
-# Change to directory the PBS script was submitted from
-cd $PBS_O_WORKDIR
+## Setup your sbatch flags
+#SBATCH --time=00:05:00
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=8
+#SBATCH --job-name=helloworld_parallel
+#SBATCH --mail-user=myemailaddress@unm.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --output=helloworld_parallel.o%j
+#SBATCH --error=helloworld_parallel.e%j
+# Change to the directory the SBATCH script was submitted from
+cd $SLURM_SUBMIT_DIR
 # load the environment module to use OpenMPI built with the Intel compilers
-module load openmpi-3.1.1-intel-18.0.2-hlc45mq 
-# print out a hello message from each of the processors on this host
-# run the command "hostname" on ever CPU. Hostname prints the name of the computer is it running on.
-# $PBS_NP is the total number of CPUs requested. In this case 4 nodes x 8 CPUS per node = 32
-# Since we are running on multiple nodes (computers) we have to tell mpirun the names of the nodes we were assigned. Those names are in $PBS_NODEFILE.
-mpirun -np $PBS_NP -machinefile $PBS_NODEFILE hostname
+module load openmpi-3.1.1-intel-18.0.2-hlc45mq
+# run the echo command on every CPU across all nodes.
+# $SLURM_NTASKS is the total number of CPUs requested. In this case 4 nodes x 8 CPUs per node = 32
+# $SLURM_JOB_NODELIST contains the names of the nodes we were assigned.
+mpirun -np $SLURM_NTASKS echo "Hello World from host $(hostname)"
 ###################################################
 ```
+
+*This quickbyte was validated on 5/26/2026*
