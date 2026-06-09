@@ -8,7 +8,7 @@ Slurm accounting allows us to track resource usage at CARC and use that informat
 At CARC, accounts correspond to CARC projects. The account name is the project ID. `myaccounts` will show you all of the accounts you are a member of. Example:
 
 ```
-[tredfear@xena]:~ $ myaccounts
+[tredfear@easley]:~ $ myaccounts
       User    Account
 ---------- ----------
   tredfear    systems
@@ -18,7 +18,7 @@ At CARC, accounts correspond to CARC projects. The account name is the project I
 To view more information about an account, you can use the command `sacctmgr show account <account_name>`. Example:
 
 ```
-[tredfear@xena]:~ $ sacctmgr show account 1000001
+[tredfear@easley]:~ $ sacctmgr show account 1000001
    Account                Descr                  Org
 ---------- -------------------- --------------------
    1000001   hpc@unm sys admin              download
@@ -43,15 +43,15 @@ If there exists a home file in your home directory called `.default_slurm_accoun
 If you do not specify `--account` in your submission script and there is no `~/.default_slurm_account` (or the account specified therein is not valid), your resource usage will be attributed to the newest project you are a part of. You can find out which project this is with the command `sacctmgr show user <username>`. Example:
 
 ```
-[tredfear@xena]:~ $ sacctmgr show user tredfear
+[tredfear@easley]:~ $ sacctmgr show user tredfear
       User   Def Acct     Admin
 ---------- ---------- ---------
   tredfear    1000001      None
 ```
 You can then use `sacctmgr show account` as specified above to find more information about this account.
 
-More resources:  
-http://www.physik.uni-leipzig.de/wiki/files/slurm_summary.pdf  
-https://slurm.schedmd.com/fair_tree.html  
-https://slurm.schedmd.com/sacctmgr.html  
+More resources:
+http://www.physik.uni-leipzig.de/wiki/files/slurm_summary.pdf
+https://slurm.schedmd.com/fair_tree.html
+https://slurm.schedmd.com/sacctmgr.html
 https://slurm.schedmd.com/sacct.html

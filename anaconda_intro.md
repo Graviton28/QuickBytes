@@ -6,7 +6,7 @@ Fundamentally, Anaconda is a distribution of Python and R with a collection of a
 
 ### Creating a new conda environment
 
-Let's create an environment on Wheeler to run a python machine learning script that uses the TensorFlow library, python version 3.5, and the pandas library. Once you log in to Wheeler using `ssh` load the anaconda software module with the command:
+Let's create an environment on Easley to run a python machine learning script that uses the TensorFlow library, python version 3.5, and the pandas library. Once you log in to Easley using `ssh` load the anaconda software module with the command:
 
 `module load anaconda3`
 
@@ -110,7 +110,7 @@ The following NEW packages will be INSTALLED:
 Proceed ([y]/n)?
 ```
 
-This gives you the list of all packages you requested to be installed and their dependencies, as well as the package version and build. Of note is the environment location pathway at the top of the package plan, you will notice that `conda` by default installs into your local directory and does not need administrative access to install packages. This means that you can administer your own Anaconda environments at CARC. 
+This gives you the list of all packages you requested to be installed and their dependencies, as well as the package version and build. Of note is the environment location pathway at the top of the package plan, you will notice that `conda` by default installs into your local directory and does not need administrative access to install packages. This means that you can administer your own Anaconda environments at CARC.
 
 When you verify the package plan `conda` will proceed with downloading package binaries and installing them into the environment directory. You will see the progress of installation and a message with how to activate your environment once complete:
 

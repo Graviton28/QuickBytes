@@ -2,7 +2,7 @@
 
 Stacks is a common and [well documented](https://catchenlab.life.illinois.edu/stacks/) pipeline for processing RADseq data. RADseq data is a method of reduced representation genomic sequencing, where genomic DNA is cut up with restriction enzymes, which are then targeted by sequencing adapters. This allows a researcher to get thousands of loci randomly scattered across the genome, which can be sequenced at moderate depths for low prices. This is sufficient for many population genomic analyses, such as tests of population structure, phylogenetics, gene flow, and even coarse attempts to locate regions of the genome that are under selection. Stacks can be run with or without a reference genome, but using a reference genome is reccomended for improved accuracy.
 
-Stacks can easily be run on Wheeler with installed modules, and here we outline how with some simple "quality of life" adjustments and tips. We'll be focused on the reference based method, as the non-reference-based is sufficiently run through a driver script provided by the developers of Stacks (denovo_map.pl). We'll quickly mention it at the end. This can often be run on a single node on Wheeler, as the only intense step tends to be alignment, which is quick due to the small size of RADseq data. For example, a dataset of ~90 bird individuals with an average of 1 million reads/sample took four hours on one node. Organisms with larger genomes will take more time and memory.
+Stacks can easily be run on Easley with installed modules, and here we outline how with some simple "quality of life" adjustments and tips. We'll be focused on the reference based method, as the non-reference-based is sufficiently run through a driver script provided by the developers of Stacks (denovo_map.pl). We'll quickly mention it at the end. This can often be run on a single node on Easley, as the only intense step tends to be alignment, which is quick due to the small size of RADseq data. For example, a dataset of ~90 bird individuals with an average of 1 million reads/sample took four hours on one node. Organisms with larger genomes will take more time and memory.
 
 ## Preliminaries ##
 
@@ -34,7 +34,7 @@ Demultiplexing with Stacks is comparatively easy. You just need a file of barcod
 Here is how to run it, assuming you are dealing with paired end reads, gzipped fastq files, and used a single enzyme (ndeI) for your restriction digest. Note the the "raw_reads" directory is the one that you'll use for the aligning step at the start of the reference-based assembly:
 
 	process_radtags -p /path/to/MULTIPLEXED_READS/ -b /path/to/BARCODES.file -o /path/to/raw_reads/ \
-		-i gzfastq -e ndeI -c -q -r -E phred33 
+		-i gzfastq -e ndeI -c -q -r -E phred33
 
 The command is different for single end reads. You must specify each fastq input indiviually with the -f flag, as shown below. The rest is the same:
 
@@ -56,13 +56,13 @@ We'll assume you demultiplex your reads before running the pipeline described be
 	mkdir stacks_out
 	mkdir populations_out
 
-The modules you need are stacks, bwa, and samtools. All are availible on Conda, but you will almost certainly be running this on Wheeler (low resource use), which has recent versions of all three installed:
+The modules you need are stacks, bwa, and samtools. All are available on Conda, but you will almost certainly be running this on Easley (low resource use), which has recent versions of all three installed:
 
 	module load stacks-2.41-gcc-7.4.0-7r6auk7
 	module load bwa-0.7.17-intel-18.0.2-7jvpfu2
 	module load samtools-1.10-gcc-9.3.0-python3-ikifznw
 
-We'll also set some variables for refering to paths to stuff. We assume that the reference names (ReferenceBaseName):
+We'll also set some variables for referring to paths to stuff. We assume that the reference names (ReferenceBaseName):
 
 	src=$PBS_O_WORKDIR
 	bwa_ref=$src/ReferenceBaseName
@@ -72,7 +72,7 @@ Next, we need to index our reference:
 
 	bwa index -p $bwa_ref $bwa_ref.fa
 
-This is the big step, which uses the Burroughs-Wheeler Aligner to align our reads to our reference. Note that this should be able to be done using pipes, but I've had issues with that, so we just remove the files at the end of each loop.
+This is the big step, which uses the BURROUGHS_EASLEY_PLACEHOLDER Aligner to align our reads to our reference. Note that this should be able to be done using pipes, but I've had issues with that, so we just remove the files at the end of each loop.
 
 	while read indiv
 	do
@@ -93,11 +93,11 @@ The next step is to run gstacks, which runs these "traditional" genomics files i
 	gstacks -I $src/bam_files/ -M $src/popmap -O $src/stacks_out/ -t $threads
 
 Finally, we run populations! This specific command will give us a 75% complete matrix of SNPs, one random SNP per locus, F<sub>st</sub> values, PLINK .bed and .map files, and use kernel smoothing for specific statistics. We also output a Variant Call Format (VCF) file, which can be used to generate inputs for most programs:
-	
+
 	populations -P $src/stacks_out/ -M $src/popmap -O $src/populations_out/ \
 		--vcf -R .75 --write-random-snp --fstats --plink --smooth -t $threads
-	
-A quick note, if you want input for RAxML or similar phylogenetic programs, you can get a interleaved phylip file by making a popmap file with each individual having its own population and specifying you want a phylip output. Please note that this is strict phylip format, meaning you want a maximum of 9 letters in your "population" column of the popmap (10 works, but will cause errors when input to certain programs). Also, this assumes you have a directory "populations_individual":
+
+A quick note, if you want input for RAxML or similar phylogenetic programs, you can get an interleaved phylip file by making a popmap file with each individual having its own population and specifying you want a phylip output. Please note that this is strict phylip format, meaning you want a maximum of 9 letters in your "population" column of the popmap (10 works, but will cause errors when input to certain programs). Also, this assumes you have a directory "populations_individual":
 
 	populations -P $src/stacks_out/ -M $src/popmap_individual -O $src/popualtions_individual/ \
 		-R .75 --phylip-var-all -t $threads

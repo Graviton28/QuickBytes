@@ -1,6 +1,6 @@
 # Using GPUs with MATLAB
 
-1. [Using a single GPU on Xena](#1)
+1. [Using a single GPU on Easley](#1)
      1. [Use GPU in Interactive Session](#1.1)
           1. [Identify and Select GPU](#1.1.1)
           2. [Using Arrays on GPU](#1.1.2)
@@ -13,35 +13,35 @@
           2. [PBS Script](#1.2.2)
           3. [Slurm Script](#1.2.3)
           4. [Submit Job to Queue](#1.2.4)
-2. [Using Multiple GPUs on a single Xena node](#2)
+2. [Using Multiple GPUs on a single Easley node](#2)
     1. [MATLAB Script](#2.2)
     2. [Slurm Script](#2.2)
     3. [Submit Job to Queue](#2.3) 
 3. [Using Multiple Nodes with their own GPUs](#3)
 
 
-## Using a single GPU on Xena <a name="1"></a>
+## Using a single GPU on Easley <a name="1"></a>
 
 MATLAB allows the utilization of a single GPU that is part of a machine.
-The following sections show how to access and utilize a GPU on xena.
+The following sections show how to access and utilize a GPU on Easley.
 
 ### Use GPU in Interactive Session <a name="1.1"></a>
 
-First, we will open MATLAB in an interactive session on a xena compute node.
+First, we will open MATLAB in an interactive session on a Easley compute node.
 
 #### Identify and Select GPU <a name="1.1.1"></a>
 
 Start by requesting an interactive session:
 
 ```bash
-xena:~$ srun -G 1 --pty bash
+easley:~$ srun -G 1 --pty bash
 ```
 
 Once you have a node allocated to you, load the MATLAB module and start a MATLAB session:
 
 ```bash
-xena01:~$ module load matlab
-xena01:~$ matlab
+easley01:~$ module load matlab
+easley01:~$ matlab
 
 To get started, type doc.
 For product information, visit www.mathworks.com.
@@ -63,7 +63,7 @@ To get information about the available gpus, use this function:
 ```bash
 >> gpuDeviceTable
 ```
-That will print something that looks like this on Xena:
+That will print something that looks like this on Easley:
 ```bash
 ans =
 
@@ -250,26 +250,26 @@ matlab -nodisplay -r gpu_matlab > gpu_matlab.out
 
 #### Submit Job to Queue <a name="1.2.4"></a>
 
-Now we can submit the job to the scheduler from the xena head node:
+Now we can submit the job to the scheduler from the Easley head node:
 
 PBS script version:
 ```bash
-xena:~$ qsub gpu_matlab.pbs
+easley:~$ qsub gpu_matlab.pbs
 ```
 
 Slurm script version:
 ```bash
-xena:~$ sbatch gpu_matlab.sh
+easley:~$ sbatch gpu_matlab.sh
 ```
 
 View the results:
 ```bash
-xena:~$ cat gpu_matlab.out
+easley:~$ cat gpu_matlab.out
 ```
 
-## Using Multiple GPUs on a single Xena node <a name="2"></a>
+## Using Multiple GPUs on a single Easley node <a name="2"></a>
 
-Xena contains some nodes with two GPUs.
+Easley contains some nodes with two GPUs.
 MATLAB allows for the utilization of multiple GPUs on a single node in the same way you use multiple CPUs.
 To show how this works, below is an example MATLAB script that will create a logistic map using all available GPU's on the assigned node.
 
@@ -322,7 +322,7 @@ return
 ### Slurm Script <a name="2.2"></a>
 
 
-When using the `--partition dualGPU` flag on xena, you must also set `--cpus-per-task 2` and `-G 2` for MATLAB to correctly find and utilize the available GPUs.
+When using the `--partition dualGPU` flag on Easley, you must also set `--cpus-per-task 2` and `-G 2` for MATLAB to correctly find and utilize the available GPUs.
 These numbers should match, as MATLAB will use a CPU to access each GPU.
 For this partition, we ask for two CPUs and two GPUs.
 
@@ -356,13 +356,13 @@ matlab -nodisplay -r gpu_logistic_map > gpu_logistic_map.out
 
 ### Submit Job to Queue <a name="2.3"></a>
 
-Now we can submit the job to the scheduler from the xena head node:
+Now we can submit the job to the scheduler from the Easley head node:
 ```bash
-xena:~$ sbatch gpu_logistic_map.sh
+easley:~$ sbatch gpu_logistic_map.sh
 ```
 View the results:
 ```bash
-xena:~$ cat gpu_logistic_map.out
+easley:~$ cat gpu_logistic_map.out
 ```
 
 You can also view the `logistic_map.jpg` image using your preferred method.

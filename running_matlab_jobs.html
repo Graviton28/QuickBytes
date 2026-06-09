@@ -348,7 +348,7 @@ fname=’randnums.csv’;
 csvwrite(fname,rmatrix);
 quit</code></pre></div>
 
-<p>This program can be submitted using batch mode with the command <code>matlab -r my_program</code>. In this command the <code>-r</code> flag is telling MATLAB to run your script <code>my_program.m</code> in batch mode. Notice that when calling a script with batch mode you leave off the extension <code>.m</code>. This command works if you are running on a local machine, however, when running jobs at CARC you need to submit your job to the job scheduler using a PBS script. For those unfamiliar with PBS scripts explanations and example scripts can be found <a href="http://carc.unm.edu/user-support/using-carc-systems/running-jobs/sample-pbs-scripts.html">here</a>. To submit our MATLAB program to the Wheeler job scheduler we would put our batch command in a PBS script similiar to the one below:</p>
+<p>This program can be submitted using batch mode with the command <code>matlab -r my_program</code>. In this command the <code>-r</code> flag is telling MATLAB to run your script <code>my_program.m</code> in batch mode. Notice that when calling a script with batch mode you leave off the extension <code>.m</code>. This command works if you are running on a local machine, however, when running jobs at CARC you need to submit your job to the job scheduler using a PBS script. For those unfamiliar with PBS scripts explanations and example scripts can be found <a href="http://carc.unm.edu/user-support/using-carc-systems/running-jobs/sample-pbs-scripts.html">here</a>. To submit our MATLAB program to the Easley job scheduler we would put our batch command in a PBS script similiar to the one below:</p>
 
 <div><pre><code class="language-bash">#!/bin/bash
 
@@ -365,7 +365,7 @@ cd $PBS_O_WORKDIR
 # Loading the MATLAB software module. The specific module name is system dependent.
 module load matlab/R2017a
 
-# Calling MATLAB in batch mode to run your program. 
+# Calling MATLAB in batch mode to run your program.
 matlab -r -nojvm -nodisplay my_program &gt; /dev/null</code></pre></div>
 
 <p>There are a couple of additions to our batch mode command when calling MATLAB on our program. Remember that the <code>-r</code> flag is telling MATLAB to run in batch mode. The <code>-nojvm</code> flag turns off Java Virtual Machine since this is only necessary when running the MATLAB GUI. The <code>-nodisplay</code> turns off all graphical output from MATLAB since we do not support visual display at CARC. At the end of our command we then redirect what would normally be written to <code>stdout</code>, or your MATLAB console when running interactively, to a special file called <code>null</code>. We do this because MATLAB normally writes all output to <code>stdout</code> which is stored in memory (RAM). If your program generates enough output to <code>stdout</code> this can overload local memory and crash the compute node that your program is running on. If you wish to keep what is printed to <code>stdout</code> you can redirect to a file instead using the following syntax and replacing the name with whatever you would like to call your file:</p>

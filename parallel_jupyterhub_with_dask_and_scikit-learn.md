@@ -4,9 +4,9 @@
 
 ### Log in to JupyterHub
 
-On a computer connected to ethernet on main campus, open an internet browser go to https://wheeler.alliance.unm.edu:8000 where you will be asked to log in. Use your carc username and password. This logs you into a compute node where your programs in Jupyter notebook will be running. Because it is beginning an interactive job it may not be instant depending on resources available at the time. Once logged in, you can see all the files in your home directory. 
+On a computer connected to ethernet on main campus, open an internet browser go to https://easley.alliance.unm.edu:8000 where you will be asked to log in. Use your carc username and password. This logs you into a compute node where your programs in Jupyter notebook will be running. Because it is beginning an interactive job it may not be instant depending on resources available at the time. Once logged in, you can see all the files in your home directory.
 
-To be kind to other users when you are finished with JupyterHub for the day, please be sure to go to "control panel" in the top righthand corner and click "stop my server". This will free up the node for other users. Otherwise, the default walltime is 12 hours. 
+To be kind to other users when you are finished with JupyterHub for the day, please be sure to go to "control panel" in the top righthand corner and click "stop my server". This will free up the node for other users. Otherwise, the default walltime is 12 hours.
 
 
 ## Setup cluster resources with Dask-jobqueue
@@ -37,15 +37,15 @@ print(cluster.job_script())
 ```
 
     #!/usr/bin/env bash
-    
+
     #PBS -N dask-worker
     #PBS -q default
     #PBS -l nodes=1:ppn=8
     #PBS -l walltime=01:00:00
     JOB_ID=${PBS_JOBID%%.*}
-    
+
     /opt/local/anaconda3/envs/jupyterhub/bin/python -m distributed.cli.dask_worker tcp://172.16.2.42:46451 --nthreads 8 --memory-limit 42.00GB --name name --nanny --death-timeout 60
-    
+
 
 
 
@@ -83,9 +83,9 @@ client = Client(cluster)
 
 
 ```python
-def slow_increment(x): 
+def slow_increment(x):
     time.sleep(1)
-    return x + 1 
+    return x + 1
 
 ```
 

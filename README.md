@@ -1,6 +1,6 @@
 # QuickBytes
-Quickbytes are tutorials designed to help CARC users.  
-    
+Quickbytes are tutorials designed to help CARC users.
+
    * [Linux-Intro](https://github.com/UNM-CARC/QuickBytes/blob/master/linux_intro.md)
 
    * Running jobs
@@ -11,20 +11,20 @@ Quickbytes are tutorials designed to help CARC users.
       * [PBS/TORQUE](https://github.com/UNM-CARC/QuickBytes/blob/master/pbs-torque.md)
       * [Sample PBS script](https://github.com/UNM-CARC/QuickBytes/blob/master/pbs_scripts2.md)
       * [Submitting jobs](https://github.com/UNM-CARC/QuickBytes/blob/master/submitting_jobs.md)
-      * [Check running jobs](https://github.com/UNM-CARC/QuickBytes/blob/master/checking_on_running_jobs.md) 
+      * [Check running jobs](https://github.com/UNM-CARC/QuickBytes/blob/master/checking_on_running_jobs.md)
       * [Managing modules](https://github.com/UNM-CARC/QuickBytes/blob/master/module_management.md)
       * [Intro to Slurm](https://github.com/UNM-CARC/QuickBytes/blob/master/Intro_to_slurm.md)
       * [Converting PBS to Slurm](https://github.com/UNM-CARC/QuickBytes/blob/master/pbs2slurm.md)
       * [Intro to Slurm accounting at CARC](https://github.com/UNM-CARC/QuickBytes/blob/master/slurm_accounting.md)
       * [GNU Parallel](https://github.com/UNM-CARC/QuickBytes/blob/master/GNU%20Parallel.md)
-   
+
    * Applications software
       * MATLAB
          * [Running MATLAB jobs at CARC](https://github.com/UNM-CARC/QuickBytes/blob/master/running_matlab_jobs.md)
          * [Parallel MATLAB Server](https://github.com/UNM-CARC/QuickBytes/blob/master/ParallelMatlabServer.md)
          * [Parallel MATLAB batch submission](https://github.com/UNM-CARC/QuickBytes/blob/parallel_matlab_profile_creation/Parallel%20MATLAB%20profile%20setup%20and%20batch%20submission.md)
-         * [Using GPUs with MATLAB](https://github.com/UNM-CARC/QuickBytes/blob/master/Using%20GPUs%20on%20Xena%20with%20MATLAB.md)
-         * [MATLAB Deep Learning on Xena](https://github.com/UNM-CARC/QuickBytes/blob/master/MATLAB%20Deep%20Learning%20on%20Xena.md)
+         * [Using GPUs with MATLAB](https://github.com/UNM-CARC/QuickBytes/blob/master/Using%20GPUs%20on%20Easley%20with%20MATLAB.md)
+         * [MATLAB Deep Learning on Easley](https://github.com/UNM-CARC/QuickBytes/blob/master/MATLAB%20Deep%20Learning%20on%20Easley.md)
       * JupyterHub
          * [JupyterHub: Parallel Processing with MPI](https://github.com/UNM-CARC/QuickBytes/blob/master/parallelization_with%20Jupyterhub_using_mpi.md)
          * [Conda python environments for JupyterHub](https://github.com/UNM-CARC/QuickBytes/blob/master/Conda_JupyterHub.md)
@@ -40,8 +40,8 @@ Quickbytes are tutorials designed to help CARC users.
          * [Gurobi optimizer with R](https://github.com/UNM-CARC/QuickBytes/blob/master/Gurobi%20optimizer%20with%20R.md)
       * Machine Learning
          * [Tensorflow](https://github.com/UNM-CARC/QuickBytes/blob/master/Tensorflow_documentation.md)
-         * [Installing PyTorch on Xena](https://github.com/UNM-CARC/QuickBytes/blob/master/PyTorch_1.9_Xena.md)
-         * [Example PyTorch Image Classification on Xena](https://github.com/UNM-CARC/QuickBytes/blob/master/PyTorch_Classifier_Xena%20.ipynb)
+         * [Installing PyTorch on Easley](https://github.com/UNM-CARC/QuickBytes/blob/master/PyTorch_1.9_Easley.md)
+         * [Example PyTorch Image Classification on Easley](https://github.com/UNM-CARC/QuickBytes/blob/master/PyTorch_Classifier_Easley%20.ipynb)
          * [Tensorflow with multiple GPUs](https://github.com/UNM-CARC/QuickBytes/blob/master/multiGPU_tensorflow_tutorial.ipynb)
          * [Parallelization with JupyterHub using Dask and SciKit-learn](https://github.com/UNM-CARC/QuickBytes/blob/master/parallel_jupyterhub_with_dask_and_scikit-learn.md)
       * Bioinformatics
@@ -53,24 +53,24 @@ Quickbytes are tutorials designed to help CARC users.
          * [BEAST at CARC](https://github.com/UNM-CARC/QuickBytes/blob/master/Beast_at_CARC.md)
          * [Population genetic simulations with msprime (backwards time)](https://github.com/UNM-CARC/QuickBytes/blob/master/msprime_quickbyte.md)
       * Computational Chemistry
-         * [Orca on Wheeler and Taos](https://github.com/UNM-CARC/QuickBytes/blob/master/orca_wheeler_taos.md)
+         * [Orca on Easley and Taos](https://github.com/UNM-CARC/QuickBytes/blob/master/orca_easley_taos.md)
          * [Alphafold](https://github.com/UNM-CARC/QuickBytes/blob/master/alphafold.md)
       * Computational Immunology
-         * [SimCov on Wheeler](https://github.com/UNM-CARC/QuickBytes/blob/master/SimCov.md)
+         * [SimCov on Easley](https://github.com/UNM-CARC/QuickBytes/blob/master/SimCov.md)
       *  Astronomy
-         * [CASA Radio Astronomy](https://github.com/UNM-CARC/QuickBytes/blob/master/mpiCASA.md) 
+         * [CASA Radio Astronomy](https://github.com/UNM-CARC/QuickBytes/blob/master/mpiCASA.md)
       * Paraview
-        * [Paraview Wheeler](https://github.com/UNM-CARC/QuickBytes/blob/master/paraview.md)
+        * [Paraview Easley](https://github.com/UNM-CARC/QuickBytes/blob/master/paraview.md)
         * [Paraview Hopper](https://github.com/UNM-CARC/QuickBytes/blob/master/Paraview_Hopper.md)
       * [Docker and Singularity](https://github.com/UNM-CARC/QuickBytes/blob/master/singularity-markdown-version.md)
       * [Haskell at CARC](https://github.com/UNM-CARC/QuickBytes/blob/master/haskell.md)
       * [X11 Forwarding](https://github.com/UNM-CARC/QuickBytes/blob/master/X11_forwarding.md)
       * [Spark](https://github.com/UNM-CARC/QuickBytes/blob/master/spark.md)
       * [CuPy - Cuda in Python](https://github.com/UNM-CARC/QuickBytes/blob/master/CuPy_on_CARC.ipynb)
-      * [Installing Perl Libraries to Your Home Directory](https://github.com/UNM-CARC/QuickBytes/blob/master/install_perl_libraries.md) 
-      
-      
-* Workshop Slides   
+      * [Installing Perl Libraries to Your Home Directory](https://github.com/UNM-CARC/QuickBytes/blob/master/install_perl_libraries.md)
+
+
+* Workshop Slides
 These slides were used in CARC workshops. They are provided for your convenience. Github does a poor job rendering PDFs. We recomment downloading the presentations.
 
   [Current workshop schedule](https://carc.unm.edu/education--training/workshops-and-seminars.html)
@@ -101,7 +101,7 @@ These slides were used in CARC workshops. They are provided for your convenience
     * [Intermediate SLURM and StarCCM on Easley](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamicsStarCCM2026Easley-0.1.pptx)
     * [Intermediate SLURM and Machine Learning](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntermediateIntroToCARCWorkshopMachineLearning.pdf)
     * [Intro to CARC with Quantum Computing](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithQuantumComputing2025-0.1.pdf)
-    * [Intro to CARC with Computational Fluid Dynamics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamics2025-0.1.pdf) 
-    
-      
-      
+    * [Intro to CARC with Computational Fluid Dynamics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamics2025-0.1.pdf)
+
+
+

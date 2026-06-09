@@ -11,7 +11,7 @@ normal*      up 2-00:00:00      1  alloc taos02
 normal*      up 2-00:00:00      6   idle taos[03-08]
 </code></pre>
 <p>From the above above, we can see one node(taos02)  is allocated under normal partition. Similarly 2 nodes from ( 01-09) are in mixed state referring some nodes being used and some being idle.</p>
-<p><code>sinfo –N –l</code> provides more information of Node including CPU count, memory, temporary disk and so.</p>
+<p><code>sinfo -N -l</code> provides more information of Node including CPU count, memory, temporary disk and so.</p>
 <pre><code>(ceodspsp) taos:~$ sinfo -N -l
 Tue Feb 19 19:08:16 2019
 NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
@@ -52,7 +52,7 @@ srun hostname
 srun sleep
 </code></pre>
 <p>Above script requests for allocation of 4 CPUs for 10 minutes with 100MB of ram per CPU. AS the job starts to run, the script first execute the <code>srun hostname</code> followed by <code>srun sleep</code>.</p>
-<p>Arguments <code>–-job-name</code> and <code>–-output</code>  correspond to name of the job and output file name where the results are saved.</p>
+<p>Arguments <code>--job-name</code> and <code>--output</code>  correspond to name of the job and output file name where the results are saved.</p>
 <p>To submit the job you need to run</p>
 <p><code>sbatch submission.sh</code></p>
 <p>Once you execute the above command, the job enters into pending state until the resources are available for execution. If the job completes successfully then it goes to COMPLETED state, otherwise goes to FAILED state.</p>

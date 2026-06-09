@@ -1,7 +1,7 @@
 # Working with Conda
 ### Using Conda to create a new environment
 
-Let's start by logging in to Wheeler and create an empty environment. After creating a new environment we will then install Python 2.7 our newly created environment and explore what Conda is doing. To do this we must first load the module for Anaconda, in this case we will be using Anaconda3 which uses Python 3 by default. If you know that you are going to be using a lot of code written in Python 2 then you can load Anaconda instead of Anaconda3. 
+Let's start by logging in to Easley and create an empty environment. After creating a new environment we will then install Python 2.7 our newly created environment and explore what Conda is doing. To do this we must first load the module for Anaconda, in this case we will be using Anaconda3 which uses Python 3 by default. If you know that you are going to be using a lot of code written in Python 2 then you can load Anaconda instead of Anaconda3.
 
 ```bash
 $ module load anaconda3
@@ -99,7 +99,7 @@ Now our py-2.7 environment actually has something in it that we can use. There a
 $ py-2.7
 (py-2.7)$ conda install python=2.7
 ```
-You will notice that the name of the currently active environment now precedes your command prompt.   
+You will notice that the name of the currently active environment now precedes your command prompt.
 We can also save time by installing our packages while we create our environment by listing the packages we want installed after the name of the environment we are creating, as shown below:
 
 ```bash
@@ -120,8 +120,8 @@ Python 3.6.5 :: Anaconda, Inc.
 $ echo $PATH
 /opt/local/anaconda3/5.2.0/bin:/users/yourusername/bin
 ```
-You can see that we are using Python version 3.6.5 distributed by Anaconda which is located in the Anaconda `root` directory. You can also see that at the beginning of our `PATH` is that `root` directory. Now let's activate our py-2.7 environment and see how things change. 
- 
+You can see that we are using Python version 3.6.5 distributed by Anaconda which is located in the Anaconda `root` directory. You can also see that at the beginning of our `PATH` is that `root` directory. Now let's activate our py-2.7 environment and see how things change.
+
 
 ```bash
 $ source activate py-2.7
@@ -132,6 +132,6 @@ Python 2.7.15 :: Anaconda, Inc.
 (py-2.7)$ echo $PATH
 /users/yourusername/.conda/envs/py-2.7/bin:/opt/local/anaconda3/5.2.0/bin:/users/yourusername/bin
 ```
-As you can see we are now accessing Python version 2.7.15 distributed by Anaconda which is installed in the py-2.7 environment directory located in our home directory. By comparing the `PATH` before and after activating our environment you can see that Conda prepends our `PATH` to direct to your environment. This is fundamentally how Conda controls and manages environments. Once you deactivate an environment your `PATH` variable returns to its previous state.  
+As you can see we are now accessing Python version 2.7.15 distributed by Anaconda which is installed in the py-2.7 environment directory located in our home directory. By comparing the `PATH` before and after activating our environment you can see that Conda prepends our `PATH` to direct to your environment. This is fundamentally how Conda controls and manages environments. Once you deactivate an environment your `PATH` variable returns to its previous state.
 
 For more information on managing Conda environments please visit the Conda help documentation at this [link](https://conda.io/docs/user-guide/tasks/manage-environments.html).
