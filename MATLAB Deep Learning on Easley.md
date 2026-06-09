@@ -1,14 +1,14 @@
-#  MATLAB Deep Learning on Xena
+#  MATLAB Deep Learning on Easley
 
 MATLAB has great tools for deep learning and convolutional neural networks (CNNs).
-These tools can make use of GPUs, which are available for use on the Xena cluster.
+These tools can make use of GPUs, which are available for use on the Easley cluster.
 This Quickbytes tutorial will mimic the official Mathworks tutorial on using deep learning for JPEG Image Deblocking.
 To see that tutorial, follow this [link.](https://www.mathworks.com/help/images/jpeg-image-deblocking-using-deep-learning.html#JPEGImageDeblockingUsingDeepLearningExample-2 "MathWorks Deep Learning Tutorial")
 
 Before we begin, create a directory named 'deepLearningExample' from within your home directory.
 ```bash
-xena:~$ cd ~
-xena:~$ mkdir deepLearningExample
+easley:~$ cd ~
+easley:~$ mkdir deepLearningExample
 ```
 
 ## Table of Contents
@@ -35,8 +35,8 @@ xena:~$ mkdir deepLearningExample
 
 
 ## Train CNN Interactively <a name="1"></a>
-It is possible to train the the example CNN in an interactive MATLAB session and track the progress.
-This requires X11 fowarding.
+It is possible to train the example CNN in an interactive MATLAB session and track the progress.
+This requires X11 forwarding.
 For a full guide on how to do that, please view our [Quickbytes youtube tutorial.](https://www.youtube.com/watch?v=-5ic9JWHuqI&t=224s&ab_channel=UNMCARC "Quickbytes X11 Forwarding Tutorial").
 Please note that you should not fully train a CNN interactively as the plotting requires large amounts of memory.
 It is alright to use the interactive plotting to verify that a model is training.
@@ -44,35 +44,35 @@ In order to fully train a model, please schedule a job using a slurm script and 
 
 ### Open MATLAB <a name="1.1"></a>
 
-It is highly reccommended to use the dualGPU partition and request two GPUs.
+It is highly recommended to use the dualGPU partition and request two GPUs.
 The commands below will show you how to use both the single and dual GPU partitions.
 
-Once logged into Xena with X11 fowarding, you can begin an interactive job on a compute node.
+Once logged into Easley with X11 forwarding, you can begin an interactive job on a compute node.
 ```bash
-xena:~$ srun --partition singleGPU --x11 --mem 0 --ntasks 1 --cpus-per-task 16 -G 1 --pty bash
+easley:~$ srun --partition singleGPU --x11 --mem 0 --ntasks 1 --cpus-per-task 16 -G 1 --pty bash
 ```
 
-This requests a single node and gpu with X11 forwarding.
+This requests a single node and GPU with X11 forwarding.
 
-To use a machine with two gpus, use this command instead:
+To use a machine with two GPUs, use this command instead:
 ```bash
-xena:~$ srun --partition dualGPU --x11 --mem 0 --ntasks 1 --cpus-per-task 16 -G 2 --pty bash
+easley:~$ srun --partition dualGPU --x11 --mem 0 --ntasks 1 --cpus-per-task 16 -G 2 --pty bash
 ```
 
 Once you are assigned a compute node, cd into our new directory, then start an interactive session of MATLAB:
 ```bash
-xena-01:~$ cd deepLearningExample/
-xena-01:~$ module load matlab
-xena-01:~$ matlab
+easley-01:~$ cd deepLearningExample/
+easley-01:~$ module load matlab
+easley-01:~$ matlab
 ```
 
 This should bring up the MATLAB graphical user interface (GUI).
 
-Use the file brower on the left side of the window to move into your 'deepLearningExample' directory within MATLAB.
+Use the file browser on the left side of the window to move into your 'deepLearningExample' directory within MATLAB.
 
 ### Get Required Example Functions <a name="1.2"></a>
 
-Before continuing, you must move the given MathWorks MATLAB functions (.m files) into yourly created 'deepLearningExample` directory. 
+Before continuing, you must move the given MathWorks MATLAB functions (.m files) into newly created 'deepLearningExample` directory. 
 There are two ways to locate these files.
 
 1. Locate them interactively in MATLAB GUI.
@@ -80,38 +80,38 @@ There are two ways to locate these files.
 
 #### Locate them interactively in MATLAB GUI <a name="1.2.1"></a>
 
-Follow these steps to locate the files from with the MATLAB GUI opened in the above step.
+Follow these steps to locate the files from within the MATLAB GUI opened in the above step.
 
 1. Attempt to use an example function with blank arguments in the MATLAB Command Window.
 ```bash
 >> downloadIAPRTC12Data('','')
 ```
 2. That will cause an error and provide links to the examples MATLAB thinks you are using. Click on the `JPEG Image Deblocking Using Deep Learning` link.
-3. This will move MATLAB's current wortking directory to that of the Example code.
+3. This will move MATLAB's current working directory to that of the Example code.
 4. In the file browser on the left side of the window, select all of the files in the current directory.
 5. Right click the selected files and hit 'copy'.
-6. Use the file brower on the left side to navigate back to your 'deepLearningExample' directory.
-7. Right click in the file brower and select paste to place all the files in this directory.
+6. Use the file browser on the left side to navigate back to your 'deepLearningExample' directory.
+7. Right click in the file browser and select paste to place all the files in this directory.
 
 #### Locate them using the terminal <a name="1.2.2"></a>
 
 Follow these steps to copy the required example code into your new directory.
 
-1. Ssh into the compute node assigned to you (make sure the MATLAB module is loaded).
+1. SSH into the compute node assigned to you (make sure the MATLAB module is loaded).
 ```bash
-xena:~$ ssh xena-01
+easley:~$ ssh easley-01
 ```
 2. Move into the MATLAB Examples directory.
 ```bash
-xena-01:~$ cd /tmp/Examples/R2021a/deeplearning_shared/JPEGImageDeblockingDeepLearningExample
+easley-01:~$ cd /tmp/Examples/R2021a/deeplearning_shared/JPEGImageDeblockingDeepLearningExample
 ```
 3. Copy all the needed files.
 ```bash
-xena-01:~$ cp *.m ~/deepLearningExample
+easley-01:~$ cp *.m ~/deepLearningExample
 ```
 4. (Optional) Copy the pretrained example CNN.
 ```bash
-xena-01:~$ cp pretrianedJPEGDnCNN.mat ~/deepLearningExample
+easley-01:~$ cp pretrainedJPEGDnCNN.mat ~/deepLearningExample
 ```
 
 
@@ -317,12 +317,12 @@ matlab -nodisplay -r deep_learning_example > dncnn_dual_training.out
 
 To submit a job request using the single GPU script, use the following command:
 ```bash
-xena:~$ sbatch dncnn_single_gpu.sh
+easley:~$ sbatch dncnn_single_gpu.sh
 ```
 
 To submit a job request using the dual GPU script, use the following command:
 ```bash
-xena:~$ sbatch dncnn_dual_gpu.sh
+easley:~$ sbatch dncnn_dual_gpu.sh
 ```
 
 ### View Results <a name="2.3"></a>
@@ -331,12 +331,12 @@ While a network is being trained, you can see the results in real time with the 
 
 If you used the single GPU slurm script, use this command to view the output:
 ```bash
-xena:~$ cat ~/deepLearningExamples/dncnn_single_training.out
+easley:~$ cat ~/deepLearningExamples/dncnn_single_training.out
 ```
 
 If you used the dual GPU slurm script, use this command to view the output:
 ```bash
-xena:~$ cat ~/deepLearningExamples/dncnn_dual_training.out
+easley:~$ cat ~/deepLearningExamples/dncnn_dual_training.out
 ```
 
 ## Test the Model <a name="3"></a>
@@ -349,7 +349,7 @@ You can also use the pretrained example model (see the above instructions to get
 Use the following MATLAB Script to the results of a trianed model.
 To specify which model to use, replace the `<MODEL FILE>` with the name of your model.
 
-If the script is run interactively with X11 fowarding (see above instructions), an image will appear that shows the predictions made on a test image,.
+If the script is run interactively with X11 forwarding (see above instructions), an image will appear that shows the predictions made on a test image,.
 The resulting comparisons are also saved to an imaged titled 'results.tif' which can be viewed with your preferred image viewer.
 
 Create the following script with the name 'test_model.m' and ensure it lives in the 'deepLearningExample' directory.

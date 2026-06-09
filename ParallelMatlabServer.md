@@ -9,7 +9,7 @@ MATLAB parallel allows the MATLAB session you interact with on your local comput
 
 ### MATLAB Parallel Server Client Configuration
 
-Once MATLAB is installed on your local machine (the MATLAB version on your local machine must match the version on the CARC cluster) click "add-ons" to open Add-on explorer. Search for PBS. 
+Once MATLAB is installed on your local machine (the MATLAB version on your local machine must match the version on the CARC cluster) click "add-ons" to open Add-on explorer. Search for PBS.
 
 Click on the link "Parallel Computing Toolbox plugin for MATLAB Parallel Server with PBS" (there is a plugin for slurm as well).
 
@@ -26,18 +26,18 @@ Select no for shared job location.
 
 ![Wizard3](https://github.com/UNM-CARC/QuickBytes/blob/master/ParallelMatlabWizard3.png)
 
-Enter the address of the cluster you would like to use: for example, wheeler.alliance.unm.edu or xena.alliance.unm.edu.
+Enter the address of the cluster you would like to use: for example, easley.alliance.unm.edu or easley.alliance.unm.edu.
 
 Enter </users/> for the path to the PBS scripts (remote job storage location) that MATLAB will create on the cluster.
 
 Select unique subfolders.
-  
+
 ![Wizard4](https://github.com/UNM-CARC/QuickBytes/blob/master/ParallelMatlabWizard4.png)
 
 Select the number of workers and number of threads per worker. This may depend on the program you are running but in general you should have one worker per core on the cluster. For set up and validation leave the number of workers at 1. Leave the threads per worker at 1 unless your software requires more threads.
 
-Specify the path to the matlab installation on the compute nodes: /opt/local/MATLAB/R2019a (or 2020a) for the Xena cluster, and /opt/local/MATLAB/R2019a for the Wheeler cluster. It is important that you are running the same version of MATLAB as you are 
-running on the wheeler cluster. 
+Specify the path to the matlab installation on the compute nodes: /opt/local/MATLAB/R2019a (or 2020a) for the Easley cluster, and /opt/local/MATLAB/R2019a for the Easley cluster. It is important that you are running the same version of MATLAB as you are
+running on the Easley cluster.
 
 ![Wizard6](https://github.com/UNM-CARC/QuickBytes/blob/master/ParallelMatlabWizard6.png)
 
@@ -45,7 +45,7 @@ Choose flexnet for the license
 
 ![Wizard7](https://github.com/UNM-CARC/QuickBytes/blob/master/ParallelMatlabWizard7.png)
 
-Name your profile. For example "R2019a_Wheeler_PBS"
+Name your profile. For example "R2019a_Easley_PBS"
 
 ![Wizard8](https://github.com/UNM-CARC/QuickBytes/blob/master/ParallelMatlabWizard8.png)
 
@@ -88,9 +88,9 @@ pctconfig('hostname',"<your IP address>");
 
 ### Validating the Configuration
 
-Select "parallel" then create/manage clusters. 
+Select "parallel" then create/manage clusters.
 
-Choose the profile you just created. In this example, the profile name is "R2019a_Wheeler_PBS"
+Choose the profile you just created. In this example, the profile name is "R2019a_Easley_PBS"
 
 ![Validating1](https://github.com/UNM-CARC/QuickBytes/blob/master/ParallelMatlabValidate1.png)
 
@@ -115,20 +115,20 @@ The very simple program that follows demonstrates how to run parallel code using
 
 ```
 n_workers = 10;                  % We will request 10 workers to run in parallel
-p = parpool('R2019a_Wheeler_PBS', n_workers); % Create the pool of workers using the profile created earlier with 10 workers.
+p = parpool('R2019a_Easley_PBS', n_workers); % Create the pool of workers using the profile created earlier with 10 workers.
 parfor i = 1:100                % Define a parallel loop that will be distributed accross the 10 workers.
 i                               % Print the value of i for this iteration.
-end                   
+end
 delete(p);                      % Clean up the worker pool
 ```
 
 ## Monitoring MATLAB Jobs
-To check that your jobs are indeed running at CARC, you can log in (ssh) to the cluster you have submitted your job to and check your job status. The command bellow shows only your jobs. 
+To check that your jobs are indeed running at CARC, you can log in (ssh) to the cluster you have submitted your job to and check your job status. The command bellow shows only your jobs.
 
 ```
-ssh username@wheeler.alliance.unm.edu 
+ssh username@easley.alliance.unm.edu
 
 qstat -u <username>
 ```
 
-If you are testing small scripts, they may run before you can type qstat. To watch your jobs, you can type watch before the qstat (or anyother) command and it will re-run the command every 2sec. This is a good way to watch progress. 
+If you are testing small scripts, they may run before you can type qstat. To watch your jobs, you can type watch before the qstat (or anyother) command and it will re-run the command every 2sec. This is a good way to watch progress.

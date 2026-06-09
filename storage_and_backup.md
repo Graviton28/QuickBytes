@@ -33,7 +33,7 @@ In order to determine which storage type to use, it may be helpful to consider w
 
 2. Results and temporary data - This is data that is produced by your calculations such as simulation logs and are typically further analyzed or have some data of interest extracted and summarized, perhaps even reported in a publication. This data can be regenerated relatively easily, by rerunning the calculation that produced it, and is often deleted once further processed or at most, at the end of a project.
 
-We recommend that the first type of data be stored in your home directory, which is available from everywhere inside the CARC network, and is backed up each week. The second kind of data is best produced/stored on the machine-scratch drives. In cases of very high I/O, that data can temporarily be moved to the compute node and onto either the hard drive (if the machine in use has an internal hard drive) or onto shared memory (if the files are very small). An obvious benifit to using devices that are very close to the CPU and are typically only used by a single user at a time, is the high read and write speed availible (Figure 1). The cost of this speed is the fact that the data must be moved to the compute node, read in by the calculation, and anything that is intended to be saved must be moved back off the compute node before the end of walltime or before the job ends, when the compute node is returned to the general resource pool.
+We recommend that the first type of data be stored in your home directory, which is available from everywhere inside the CARC network, and is backed up each week. The second kind of data is best produced/stored on the machine-scratch drives. In cases of very high I/O, that data can temporarily be moved to the compute node and onto either the hard drive (if the machine in use has an internal hard drive) or onto shared memory (if the files are very small). An obvious benefit to using devices that are very close to the CPU and are typically only used by a single user at a time, is the high read and write speed available (Figure 1). The cost of this speed is the fact that the data must be moved to the compute node, read in by the calculation, and anything that is intended to be saved must be moved back off the compute node before the end of walltime or before the job ends, when the compute node is returned to the general resource pool.
 
 ## Example use of a node's hard drive
 
@@ -44,14 +44,14 @@ This PBS script that will first copy an input file to the compute node (large_in
 #PBS -l walltime=1:00:00
 #PBS -N Local_storage
 
-# First define a directory location as a variable, create the directory once the job has started, move data there, then cd to it and run  
+# First define a directory location as a variable, create the directory once the job has started, move data there, then cd to it and run
 TEMP_DIR=/tmp/$USER/$PBS_JOBID
 mkdir -p “$TEMP_DIR”
-cp -r ${PBS_O_WORKDIR}/large_input_data.dat “$TEMP_DIR” 
+cp -r ${PBS_O_WORKDIR}/large_input_data.dat “$TEMP_DIR”
 cd $TEMP_DIR
 
 # Now run my program
-run_my_program  
+run_my_program
 
 # Now job has finished, so mv data back to where it came
 cp -r  $TEMP_DIR/* $PBS_O_WORKDIR

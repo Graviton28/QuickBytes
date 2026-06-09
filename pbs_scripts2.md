@@ -13,7 +13,7 @@ loaded. That will be introduced in the next PBS script.
 #!/bin/bash
 ## Introduction for writing a PBS script
 ## The next lines specify what resources you are requesting.
-## Starting with 1 node, 8 processors per node, and 2 hours of walltime. 
+## Starting with 1 node, 8 processors per node, and 2 hours of walltime.
 ## Setup your qsub flags
 #PBS -l walltime=2:00:00
 #PBS -l nodes=1:ppn=8
@@ -34,7 +34,7 @@ echo Hello World from host $THIS_HOST
 Note that the `ppn` (processors per node) value must always be less than
 or equal to the number of physical cores available on each node of the
 system on which you are running and is machine specific. For example, on
-Wheeler, `ppn` should be <=8, however, we recommend you always request
+Easley, `ppn` should be <=8, however, we recommend you always request
 the maximum number of processors per node to avoid multiple jobs on one
 node that have to share memory. For more information see CARC systems
 information.
@@ -55,7 +55,7 @@ information.
 #PBS -M myemailaddress@unm.edu
 #PBS -m bae
 # load the environment module to use OpenMPI built with the Intel compilers
-module load openmpi-3.1.1-intel-18.0.2-hlc45mq 
+module load openmpi-3.1.1-intel-18.0.2-hlc45mq
 # Change to the directory where the PBS script was submitted from
 cd $PBS_O_WORKDIR
 # run the command "hostname" on ever CPU. Hostname prints the name of the computer is it running on.
@@ -68,7 +68,7 @@ mpirun -np $PBS_NP hostname
 
 ```bash
 #!/bin/bash
-## Introductory Example 
+## Introductory Example
 ## Copyright (c) 2018
 ## The Center for Advanced Research Computing
 ## at The University of New Mexico
@@ -82,7 +82,7 @@ mpirun -np $PBS_NP hostname
 # Change to directory the PBS script was submitted from
 cd $PBS_O_WORKDIR
 # load the environment module to use OpenMPI built with the Intel compilers
-module load openmpi-3.1.1-intel-18.0.2-hlc45mq 
+module load openmpi-3.1.1-intel-18.0.2-hlc45mq
 # print out a hello message from each of the processors on this host
 # run the command "hostname" on ever CPU. Hostname prints the name of the computer is it running on.
 # $PBS_NP is the total number of CPUs requested. In this case 4 nodes x 8 CPUS per node = 32

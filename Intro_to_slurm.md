@@ -1,9 +1,9 @@
 # Slurm Workload Manager
 
-Slurm is a resource manager and job scheduler designed for scheduling and allocating resources as per user job requirements.  Slurm is an open source software originally created by the Livermore Computing Center. 
+Slurm is a resource manager and job scheduler designed for scheduling and allocating resources as per user job requirements.  Slurm is an open source software originally created by the Livermore Computing Center.
 
 ## Slurm Commands
-`sinfo` provides  information regarding resources that are available from server. 
+`sinfo` provides  information regarding resources that are available from server.
 Example :
 
     user@taos:~$ sinfo
@@ -14,7 +14,7 @@ Example :
 
 From the output above we can see that one node (taos02) is allocated under a normal partition. Similarly, we can see that two nodes (taos01 and taos09) are in a mixed state meaning multiple users have resources allocated on the same node. The final line in the output shows that all other nodes (taos03-08) are currently idle.
 
-`sinfo –N –l` provides more detailed information about individuals nodes including CPU count, memory, temporary disk space and so on. 
+`sinfo -N -l` provides more detailed information about individuals nodes including CPU count, memory, temporary disk space and so on.
 
 ```
     user@taos:~$ sinfo -N -l
@@ -33,7 +33,7 @@ From the output above we can see that one node (taos02) is allocated under a nor
 
 More information regarding `sinfo` can be found by typing `man sinfo` at the command prompt while logged in to Taos.
 
-`squeue` provides information regarding currently running jobs and the resources allocated to those jobs. 
+`squeue` provides information regarding currently running jobs and the resources allocated to those jobs.
 
 ```
     user@taos:~$ squeue
@@ -45,7 +45,7 @@ More information regarding `sinfo` can be found by typing `man sinfo` at the com
     22576    normal  megahit username  R    7:22:53      1 taos09
 ```
 
-The output from `squeue`shows you the JobID, the type of partition, the name of the job, which user owns the job, the total elapsed time of the job, how many nodes are allocated to that job, and which nodes those are. 
+The output from `squeue`shows you the JobID, the type of partition, the name of the job, which user owns the job, the total elapsed time of the job, how many nodes are allocated to that job, and which nodes those are.
 
 
 To cancel a job, you can use `scancel <JOBID>` where `<JOBID>` refers to the JobID assigned to your job by Slurm.
@@ -72,24 +72,24 @@ Example of a Slurm submission script : `slurm_submission.sh`
     srun sleep
 ```
 
-The above script is requesting from the scheduler an allocation of 4 nodes for 10 minutes with 100MB of ram per CPU. Note that we are requesting resources for four tasks, `--ntasks=4`, but not four nodes specifically. The default behavior of the scheduler is to provide one node per task, but this can be changed with the `--cpus-per-task` flag. Once the scheduler allocates the requested resources the job starts to run and the commands not preceeded by `#SBATCH` are interpreted and executed. The script first executes the `srun hostname` followed by `srun sleep` command. 
+The above script is requesting from the scheduler an allocation of 4 nodes for 10 minutes with 100MB of ram per CPU. Note that we are requesting resources for four tasks, `--ntasks=4`, but not four nodes specifically. The default behavior of the scheduler is to provide one node per task, but this can be changed with the `--cpus-per-task` flag. Once the scheduler allocates the requested resources the job starts to run and the commands not preceeded by `#SBATCH` are interpreted and executed. The script first executes the `srun hostname` followed by `srun sleep` command.
 
-The arguments `–-job-name` and `–-output` correspond to name of the job you are submitting and the name of the output file where the any output not defined by the program being executed is saved. For example, anything printed to `stdout` will be saved in your `--output` file. 
+The arguments `--job-name` and `--output` correspond to name of the job you are submitting and the name of the output file where the any output not defined by the program being executed is saved. For example, anything printed to `stdout` will be saved in your `--output` file.
 
-Of note here is the `--partition=partition_name` (or `-p partition_name`) command. This command specifies which partition, or queue, to submit your job to. If you are a member of a specific partition you likely are aware of the name of your partition, however you can see which partition you have access to with the `sinfo` command. If you leave this blank you will be submitted to the default or community partition. 
+Of note here is the `--partition=partition_name` (or `-p partition_name`) command. This command specifies which partition, or queue, to submit your job to. If you are a member of a specific partition you likely are aware of the name of your partition, however you can see which partition you have access to with the `sinfo` command. If you leave this blank you will be submitted to the default or community partition.
 
 To submit the job you execute the `sbatch` command followed by the name of your submission script, for example:
 
 `sbatch submission.sh`
 
-Once you execute the above command the job is queued until the requested resources are available for to be allocated to your job. 
+Once you execute the above command the job is queued until the requested resources are available for to be allocated to your job.
 
-Once your job is submitted you can use `sstat` command to see information about memory usage, CPU usage, and other metrics related to the jobs you own. 
+Once your job is submitted you can use `sstat` command to see information about memory usage, CPU usage, and other metrics related to the jobs you own.
 
 
-Below is an example of a Slurm submission script that runs a small python program that takes an integer as an argument, creates a random number matrix with the dimensions defined by the integer you provided, then inverts that matrix and writes it to a CSV file. 
+Below is an example of a Slurm submission script that runs a small python program that takes an integer as an argument, creates a random number matrix with the dimensions defined by the integer you provided, then inverts that matrix and writes it to a CSV file.
 
-Below is our small python program named `demo.py` that we will be invoking. 
+Below is our small python program named `demo.py` that we will be invoking.
 
     # Import Libraries
     import numpy
@@ -113,7 +113,7 @@ Below is our small python program named `demo.py` that we will be invoking.
     numpy.savetxt("%d.csv" % args.matrix, out, delimiter=",")
 
 
-Below is the Slurm submission script to submit our python program named `submission_python.sh`. This job can be submitted by typing `sbatch submission_python.sh` at the command prompt. Note the `module load` command that loads the software environment that contains the `numpy` package necessary to run our program.  
+Below is the Slurm submission script to submit our python program named `submission_python.sh`. This job can be submitted by typing `sbatch submission_python.sh` at the command prompt. Note the `module load` command that loads the software environment that contains the `numpy` package necessary to run our program.
 
     #!/bin/bash
     #
@@ -128,7 +128,7 @@ Below is the Slurm submission script to submit our python program named `submiss
     module load anaconda3
     python demo.py 34
 
-This brief tutorial should provide the basics necessary for submitting jobs to the Slurm Workload Manager on CARC machines. 
+This brief tutorial should provide the basics necessary for submitting jobs to the Slurm Workload Manager on CARC machines.
 
 
 

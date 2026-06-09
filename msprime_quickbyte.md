@@ -27,7 +27,7 @@ In a script or in python command line, we'll import msprime as msp for convenien
 The simulations themselves, at a base level, are very simple. All that's needed is a sample size of individuals "tracked" backwards. Note that these are assumed diploid unless ploidy is specified:
 
 	trees = msp.sim_ancestry(samples=10)
-	
+
 Mutations can be added using sim_mutations, ideally changing the default mutation rate (here to the per-year songbird mutation rate):
 
 	mutations = msp.sim_mutations(trees, rate=2.3e-9)
@@ -41,12 +41,12 @@ Unlike the older versions of msprime, outside of pre-made demographic scenarios,
 	demo = msp.Demography()
 	demo.add_population(name="pop1", initial_size=10000)
 	demo.add_population(name="pop2", initial_size=20000)
-	
+
 Next, we'll set up an ancestral population and add a population split time (the size is equal to the size before a bottleneck we implement below):
 
 	demo.add_population(name="anc_pop12", initial_size=50000)
 	demo.add_population_split(time=5700, derived=["pop1","pop2"], ancestral="anc_pop12")
-	
+
 Finally, we'll add symmetric migration (i.e. gene flow) between the two focal populations:
 
 	demo.set_symmetric_migration_rate(['pop1', 'pop2'], 0.001)
@@ -54,9 +54,9 @@ Finally, we'll add symmetric migration (i.e. gene flow) between the two focal po
 We can have the migration rate change over time too, here we increase the migration rate during the period between the split time (5700 generations ago) and 4000 generations go:
 
 	demo.add_symmetric_migration_rate_change(4000, ['pop1', 'pop2'], 0.01)
-	
+
 The final common demographic event is population size change, which we'll set to have a bottleneck three quarters of the way through the simulation. That is, we set the population size of population 1 to be three times the present population 2500 years:
-	
+
 	demo.add_population_parameters_change(time=2500, initial_size=30000, population="pop1")
 
 Finally, we need to sort these events, as we added them out of order for instructional purposes:
@@ -64,7 +64,7 @@ Finally, we need to sort these events, as we added them out of order for instruc
 	demo.sort_events()
 
 A really helpful debugging feature is the print function for demography objects, it lists and explains the events and migration matrix!
-	
+
 	print(demo)
 
 Bringing this all together, our simulation will look like:
@@ -73,7 +73,7 @@ Bringing this all together, our simulation will look like:
                          demography=demo,
                          recombination_rate=1e-8,
                          sequence_length=1e7)
-			 
+
 And we'll add mutations like this, using a yearly rate of 2.3e-9 and a generation time of 2.55 years (same as the case study):
 
 	mutations = msp.sim_mutations(trees, rate=5.9e-9)
@@ -94,12 +94,12 @@ You could also use GNU parallel to iterate over multiple parameter combinations,
 
 ## Case study: Divergence between connected islands ##
 
-Here we look at three islands interconnected at glacial maxima, modeled after Choiseul, Isabel, and Guadalcanal of the Solomon Islands. These islands are arranged from west to east, with Guadalcanal arguably not being fully connected to the rest. Our goal is to assess [F<sub>ST</sub>](https://onlinelibrary.wiley.com/doi/10.1111/j.1558-5646.1984.tb05657.x) between islands, for which which will use the scikit-allel package. Empirically, we find that F<sub>ST</sub> between Isabel and Choiseul is much higher than between Guadalcanal and Isabel, consistent with the slight break between those two islands. However, F<sub>ST</sub> increases faster after divergence with lower population size, so we want to know what density of birds on Guadalcanal would be required to produce this result given knowledge that a density of 25 birds/km<sup>2</sup> produced the empirical F<sub>ST</sub> between Isabel and Choiseul. We will test 5 densities for Guadalcanal (5, 10, 15, 20, 25, and 30), each with 30 replicates, holding the population density on Isabel as a constant 25 birds/km<sup>2</sup>.
+Here we look at three islands interconnected at glacial maxima, modeled after Choiseul, Isabel, and Guadalcanal of the Solomon Islands. These islands are arranged from west to east, with Guadalcanal arguably not being fully connected to the rest. Our goal is to assess [F<sub>ST</sub>](https://onlinelibrary.wiley.com/doi/10.1111/j.1558-5646.1984.tb05657.x) between islands, for which we will use the scikit-allel package. Empirically, we find that F<sub>ST</sub> between Isabel and Choiseul is much higher than between Guadalcanal and Isabel, consistent with the slight break between those two islands. However, F<sub>ST</sub> increases faster after divergence with lower population size, so we want to know what density of birds on Guadalcanal would be required to produce this result given knowledge that a density of 25 birds/km<sup>2</sup> produced the empirical F<sub>ST</sub> between Isabel and Choiseul. We will test 5 densities for Guadalcanal (5, 10, 15, 20, 25, and 30), each with 30 replicates, holding the population density on Isabel as a constant 25 birds/km<sup>2</sup>.
 
 First, we have to write our python script. We'll use the argparse module to hand our arguments. Note that we'll set Isabel as the first population and Guadalcanal as the second (in a more complete version we can take island names as input and have a function to determine their sizes). It will output the population size of the first (Isabel) and second (Guadalcanal) island along with the F<sub>ST</sub>.
 
 	import os, sys, msprime as msp, numpy as np, allel, re, argparse
-	
+
 	def main():
 		# set up argparse
 		parse = argparse.ArgumentParser(description = "Get simulation parameters")
@@ -108,14 +108,14 @@ First, we have to write our python script. We'll use the argparse module to hand
 		parse.add_argument("-d2", "--density2", type=float, help="Density of second population")
 		parse.add_argument("-o", "--output", type=str, help="Path to output file")
 		args = parse.parse_args()
-		
+
 		# assign argparse values to variables
 		dens1, dens2, outfile = args.density1, args.density2, args.output
-		
+
 		# calculate population sizes, with Isabel and Guadalcanal being 2999 and 5302 km<sup>2</sup> respectively
 		size1 = dens1 * 2999
 		size2 = dens2 * 5302
-		
+
 		# set up number of samples and demography
 		samples = 30
 		demography = msp.Demography()
@@ -123,33 +123,33 @@ First, we have to write our python script. We'll use the argparse module to hand
 		demography.add_population(name="pop2", initial_size=size2)
 		demography.add_population(name="anc_pop12", initial_size=size1+size2)
 		demography.add_population_split(time=5700, derived=["pop1","pop2"], ancestral="anc_pop12")
-		
+
 		# run simulation for 10 megabases
 		trees = msp.sim_ancestry(samples={"pop1":samples, "pop2":samples},
 			demography=demography,
 			recombination_rate=1e-8,
 			sequence_length=1e7)
-		
+
 		# add mutations with a common estimate of mutation rate in birds
 		mutations = msp.sim_mutations(trees, rate=5.9e-9)
-		
+
 		# get haplotypes from simulation
     		haplotypes = np.array(mutations.genotype_matrix())
     		genotypes = allel.HaplotypeArray(haplotypes).to_genotypes(ploidy=2)
 
    		# calculate fst, assumes even sample size
     		fst = allel.stats.fst.average_weir_cockerham_fst(genotypes,[list(range(0,samples)),list(range(samples,samples*2))],10)[0]
-		
+
 		# write output to file
 		output = open(outfile, "a")
     		output.write(str(int(size1))+"\t"+str(int(size2))+"\t"+str(fst)+"\n")
     		output.close()
-	
+
 	if __name__ == '__main__':
 		main()
-	
-Now that we have our scripted simulation, we'll write a PBS script to run it in parallel! We assumes you have a directory in your working directory called "output" and named your script "island_msp_twopop.py". We'll name files based on the denisty on Guadalcanal. We don't have it written in the script, but if you already have something in "output", this just appends to those files (i.e. "rm output\/*" beforehand). Note that this script excludes the header.
-	
+
+Now that we have our scripted simulation, we'll write a PBS script to run it in parallel! We assume you have a directory in your working directory called "output" and named your script "island_msp_twopop.py". We'll name files based on the density on Guadalcanal. We don't have it written in the script, but if you already have something in "output", this just appends to those files (i.e. "rm output\/*" beforehand). Note that this script excludes the header.
+
 	# prepare GNU parallel
 	module load parallel-20170322-gcc-4.8.5-2ycpx7e
 	source $(which env_parallel.bash)
@@ -157,14 +157,14 @@ Now that we have our scripted simulation, we'll write a PBS script to run it in 
 	# load our environment
 	module load miniconda3-4.7.12.1-gcc-4.8.5-lmtvtik
 	source activate msp1-env
-		
-	# make a shortcut for our working directory, where we assume all scripts are located.	
+
+	# make a shortcut for our working directory, where we assume all scripts are located.
 	dir=$PBS_O_WORKDIR
-		
+
 	env_parallel --sshloginfile $PBS_NODEFILE \
 		'echo {2}; python $dir/island_msp_twopop.py -d1 25 -d2 {1} -o $dir/output/density_{1}.out' \
 		::: 3 4 5 10 15 20 25 30 ::: {1..30}
-		
+
 For interpretting these results, the empirical F<sub>ST</sub> value between Guadalcanal and Isabel is 0.077, and the best density match was 4 birds/km<sup>2</sup> (F<sub>ST</sub>=0.79). That means that to get the observed F<sub>ST</sub>, Guadalcanal would have to have 16% of the population density inferred on the other islands. Genetic diversity doesn't support this, suggesting that the gap between them formed an excess of population structure compared to the other islands!
 
 ## Citation ##
