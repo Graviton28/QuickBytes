@@ -1,11 +1,11 @@
 # Running MATLAB Jobs at CARC
 
 ### MATLAB
-MATLAB is a powerful software environment and language especially for matrix manipulation and calculations, whence the name __MAT__rix__LAB__oratory. if you are unfamiliar with MATLAB please visit there website for more information at this [link](https://www.mathworks.com/products/matlab.html). For a list of which versions of MATLAB are available on a certain system use the command `module avail matlab` on the head node. MATLAB is installed on all CARC systems, however, it can only be accessed on the compute nodes and is not available on the head node. In order to run MATLAB jobs at CARC it is necessary to call the MATLAB software in batch mode to run on a script/program supplied by the user. 
+MATLAB is a powerful software environment and language especially for matrix manipulation and calculations, whence the name __MAT__rix__LAB__oratory. if you are unfamiliar with MATLAB please visit there website for more information at this [link](https://www.mathworks.com/products/matlab.html). For a list of which versions of MATLAB are available on a certain system use the command `module avail matlab` on the head node. MATLAB is installed on all CARC systems, however, it can only be accessed on the compute nodes and is not available on the head node. In order to run MATLAB jobs at CARC it is necessary to call the MATLAB software in batch mode to run on a script/program supplied by the user.
 
 ### Batch mode
 
-Many users are likely familiar with using the MATLAB GUI to run their code either in the interactive console or by launching a script. However, it is often useful to run a Matlab program from the command line in batch mode, as though it were a shell script. MATLAB can be run non-interactively using a built in function called batch mode. All MATLAB jobs should be run using batch mode when using CARC systems. 
+Many users are likely familiar with using the MATLAB GUI to run their code either in the interactive console or by launching a script. However, it is often useful to run a Matlab program from the command line in batch mode, as though it were a shell script. MATLAB can be run non-interactively using a built in function called batch mode. All MATLAB jobs should be run using batch mode when using CARC systems.
 
 ### Submitting a job with batch mode
 
@@ -18,7 +18,7 @@ fname='randnums.csv';
 csvwrite(fname,rmatrix);
 quit
 ```
-This program can be submitted using batch mode with the command `matlab -r my_program`. In this command the `-r` flag is telling MATLAB to run your script `my_program.m` in batch mode. Notice that when calling a script with batch mode you leave off the extension `.m`. This command works if you are running on a local machine, however, when running jobs at CARC you need to submit your job to the job scheduler using a PBS script. For those unfamiliar with PBS scripts explanations and example scripts can be found [here](http://carc.unm.edu/user-support/using-carc-systems/running-jobs/sample-pbs-scripts.html). To submit our MATLAB program to the Wheeler job scheduler we would put our batch command in a PBS script similar to the one below:
+This program can be submitted using batch mode with the command `matlab -r my_program`. In this command the `-r` flag is telling MATLAB to run your script `my_program.m` in batch mode. Notice that when calling a script with batch mode you leave off the extension `.m`. This command works if you are running on a local machine, however, when running jobs at CARC you need to submit your job to the job scheduler using a PBS script. For those unfamiliar with PBS scripts explanations and example scripts can be found [here](http://carc.unm.edu/user-support/using-carc-systems/running-jobs/sample-pbs-scripts.html). To submit our MATLAB program to the Easley job scheduler we would put our batch command in a PBS script similar to the one below:
 
 ```bash
 #!/bin/bash
@@ -36,7 +36,7 @@ cd $PBS_O_WORKDIR
 # Loading the MATLAB software module. The specific module name is system dependent.
 module load matlab/R2017a
 
-# Calling MATLAB in batch mode to run your program. 
+# Calling MATLAB in batch mode to run your program.
 matlab -nojvm -nodisplay -r my_program > /dev/null
 ```
 

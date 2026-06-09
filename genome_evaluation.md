@@ -4,7 +4,7 @@ Whether you're using an already assembled reference genome from a database like 
 
 ## Assessing contiguity with QUAST ##
 
-Although QUAST is fairly easy to run on personal computers, it is much easier to run in the place you already have your reference (which hopefully is CARC!). QUAST is not currently a module on any machine, so we'll install it using conda. First, if conda isn't initialized, you'll need to load a module for miniconda (with this specific module being the one on wheeler). Then, you'll make a new environment with QUAST. Unfortunately, as of writing this QuickByte, QUAST has dependency issues with other programs, and can't be in the same environment as BUSCO:
+Although QUAST is fairly easy to run on personal computers, it is much easier to run in the place you already have your reference (which hopefully is CARC!). QUAST is not currently a module on any machine, so we'll install it using conda. First, if conda isn't initialized, you'll need to load a module for miniconda (with this specific module being the one on Easley). Then, you'll make a new environment with QUAST. Unfortunately, as of writing this QuickByte, QUAST has dependency issues with other programs, and can't be in the same environment as BUSCO:
 
 	module load miniconda3-4.7.12.1-gcc-4.8.5-lmtvtik
 	conda create --name quast-env --channel bioconda quast
@@ -13,15 +13,15 @@ Now for actually running QUAST! This is simple enough, but there are a few key o
 
 	quast /path/to/focal_reference.fa -o /path/to/quast_output --large --threads 8
 
-Here are two other options that may be of interest. One option for scaffolded genomes it "--split scaffolds", where it will add a second output directory evaluating contigs instead of scaffolds in your reference. Also, if you'd like to compare to a better, preexisting reference genome (needed for some functions like putative missassemblies), use the -r flag to specify the path to a different reference. One final option that is more computationally intensive is gene finding with --glimmer, which uses [GlimmerHMM](https://ccb.jhu.edu/software/glimmerhmm/) to identify possible protein coding genes. Note that the options using GeneMark (e.g. --gene-finding) are not availible on the bioconda distribution of this software. This advanced version would look like:
+Here are two other options that may be of interest. One option for scaffolded genomes it "--split scaffolds", where it will add a second output directory evaluating contigs instead of scaffolds in your reference. Also, if you'd like to compare to a better, preexisting reference genome (needed for some functions like putative missassemblies), use the -r flag to specify the path to a different reference. One final option that is more computationally intensive is gene finding with --glimmer, which uses [GlimmerHMM](https://ccb.jhu.edu/software/glimmerhmm/) to identify possible protein coding genes. Note that the options using GeneMark (e.g. --gene-finding) are not available on the bioconda distribution of this software. This advanced version would look like:
 
 	quast /path/to/focal_reference.fa -o /path/to/quast_output -r /path/to/high_qual_refernece --large --glimmer --split-scaffolds --threads 8
 
-We'll run QUAST with a submission script, here using PBS variables. This is also made for Wheeler, being run on one core. We will store the output in a subdirectory in the submission directory. This examples runs the basic stats above on a scaffolded reference genome used [in a different QuickByte](https://github.com/UNM-CARC/QuickBytes/blob/master/GATK_QuickByte.md) borrowed from [a great paper about conservation genomics](https://academic.oup.com/gbe/article/11/7/2023/5499175).
+We'll run QUAST with a submission script, here using PBS variables. This is also made for Easley, being run on one core. We will store the output in a subdirectory in the submission directory. This examples runs the basic stats above on a scaffolded reference genome used [in a different QuickByte](https://github.com/UNM-CARC/QuickBytes/blob/master/GATK_QuickByte.md) borrowed from [a great paper about conservation genomics](https://academic.oup.com/gbe/article/11/7/2023/5499175).
 
 	module load miniconda3-4.7.12.1-gcc-4.8.5-lmtvtik
 	source activate quast-env
-	
+
 	# sample command using a reference genome
 	quast /projects/shared/tutorials/quickbytes/GATK/sagegrouse_reference.fa -o $PBS_O_WORKDIR/quast_output --large --threads 8
 
@@ -58,7 +58,7 @@ The next step will be to assess how complete our genome is by seeing how many si
 
 <details>
 	<summary> Text for the .yml file </summary>
-	
+
 	name: busco-env
 	channels:
 	  - bioconda
@@ -152,7 +152,7 @@ The next step will be to assess how complete our genome is by seeing how many si
 	  - make=4.3=hd18ef5c_1
 	  - metis=5.1.0=h58526e2_1006
 	  - mpfr=4.0.2=he80fd80_1
-	  - mysql-connector-c=6.1.11=h6eb9d5d_1007
+	  - mysql-connect tor-c=6.1.11=h6eb9d5d_1007
 	  - ncurses=6.2=h58526e2_4
 	  - numpy=1.20.3=py39hdbf815f_1
 	  - openssl=1.1.1k=h7f98852_0
@@ -350,9 +350,9 @@ Then you'll run BUSCO, which has a manual with full info on options [here](https
 	cd $PBS_O_WORKDIR
 	module load miniconda3-4.7.12.1-gcc-4.8.5-lmtvtik
 	source activate busco-test
-	
+
 	busco -i /projects/shared/tutorials/quickbytes/GATK/sagegrouse_reference.fa -o busco_test --cpu 8 --mode genome -l aves_odb10
-	
+
 The output from this is pretty straightforward, in the short summary file in the output directory (something like "short_summary.specific.aves_odb10.busco_test.txt"). An example of what to expect from the above command is below:
 
         C:95.1%[S:94.4%,D:0.7%],F:1.0%,M:3.9%,n:10844

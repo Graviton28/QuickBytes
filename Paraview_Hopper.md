@@ -4,7 +4,7 @@ ParaView is an open-source, multi-platform data analysis and visualization appli
 
 ParaView was developed to analyze extremely large datasets using distributed memory computing resources. It can be run on supercomputers to analyze datasets of petascale size.
 
-These steps will help you setup Paraview to work as a client/server mode, being your laptop/desktop computer a client and the cluster a server. Be sure that the ParaView version installed on your local computer matches the same one that is installed on Wheeler and Hopper clusters.
+These steps will help you setup Paraview to work as a client/server mode, being your laptop/desktop computer a client and the cluster a server. Be sure that the ParaView version installed on your local computer matches the same one that is installed on Easley and Hopper clusters.
 
 To see a current list of paraview versions installed on CARC clusters login to the cluster and run
 
@@ -17,18 +17,18 @@ To see a current list of paraview versions installed on CARC clusters login to t
 
 ## Hopper Cluster Connection
 
-The most common approach to use ParaView on Hopper is through the Client-Server mode support by ParaView, which requires an installation of ParaView on your local computer (Client). There are two methods to connect to Paraview Server (PVSERVER):
+The most common approach to use ParaView on Hopper is through the Client-Server mode supported by ParaView, which requires an installation of ParaView on your local computer (Client). There are two methods to connect to Paraview Server (PVSERVER):
 
 ### Method 1: Direct Connection (Off-Campus)
 
-The process to connecto to ParaView is, in one terminal you will ask Hopper to assign you compute nodes, where you will run the ParaView server. Once the ParaView server is listening for connections, you will open an ssh tunnel in another terminal window (This process is from your local computer to one of the compute nodes you were assigned). Then, you will tell the ParaView client on your computer to connect to the tunnel and so to the compute nodes at CARC, where it will perform the rendering.
+The process to connect to to ParaView is, in one terminal you will ask Hopper to assign you compute nodes, where you will run the ParaView server. Once the ParaView server is listening for connections, you will open an ssh tunnel in another terminal window (This process is from your local computer to one of the compute nodes you were assigned). Then, you will tell the ParaView client on your computer to connect to the tunnel and so to the compute nodes at CARC, where it will perform the rendering.
 
 #### Terminal 1: Login to Hopper and allocate resources
 
 #### 1. Login to Hopper
 ```bash
   ssh username@hopper.alliance.unm.edu
-```  
+```
 #### 2. Allocating 2 nodes : Total 64 cores for 30 minutes in the "General" queue/partition.
 
 ```bash
@@ -47,7 +47,7 @@ mpiexec -np 64 pvserver --mpi --force-offscreen-rendering --server-port=11111
 ![](https://github.com/UNM-CARC/QuickBytes/blob/c5ceed0f01bca6b102c0393306e602aa48189ba3/paraview_salloc_nodes_hopper.png)
 
 #### Terminal 2: Hopper SSH Tunneling
-The hopper### corresponds to the compute node allocated by slurm, and do not forget to change your username. 
+The hopper### corresponds to the compute node allocated by slurm, and do not forget to change your username.
 
 ```bash
 ssh -L 11111:hopper###:11111 username@hopper.alliance.unm.edu
@@ -56,8 +56,8 @@ ssh -L 11111:hopper###:11111 username@hopper.alliance.unm.edu
 
 #### ParaView 5.11.0 RC1 Client and Setup Server Configuration
 
-1. File --> Connect 
-2. On the "Choose Server Configuration" window: 
+1. File --> Connect
+2. On the "Choose Server Configuration" window:
 * Click on "Add Server"
 * Name: Hopper
 * Server Type: "Client / Server"
@@ -75,14 +75,14 @@ NOTE: When you are finished make sure to end the interactive job on the compute 
 
 ### Method 2: Reverse Connection (UNM On-Campus)
 
-This process allows you to connect to Hopper service node. This process requires to know your localhost IP address "local_host_IP". Check your firewall setting if you are having firewall connectivity issues.
+This process allows you to connect to Hopper service node. This process requires you to know your localhost IP address "local_host_IP". Check your firewall setting if you are having firewall connectivity issues.
 
 #### Terminal 1: Login to Hopper and allocate resources
 
 #### 1. Login to Hopper
 ```bash
   ssh username@hopper.alliance.unm.edu
-```  
+```
 #### 2. Allocating 2 nodes : Total 64 cores for 30 minutes in the "General" queue/partition.
 
 ```bash
@@ -117,5 +117,5 @@ Note: To Verify, Client - Server setup, go to "View" and select "Memory Inspecto
 NOTE: When you are finished make sure to end the interactive job on the compute nodes. You can do this by exiting "Exit" the compute node or the "scancel" command on the cluster head node.
 
 ## ParaView executables
-ParaView comes with several executables that serve different purposes. These are: paraview, pvpython, pvbatch, pvserver, pvdataserver and pvrenderserver. To learn more about this executables, https://docs.paraview.org/en/latest/UsersGuide/introduction.html#paraview-executables. 
+ParaView comes with several executables that serve different purposes. These are: paraview, pvpython, pvbatch, pvserver, pvdataserver and pvrenderserver. To learn more about this executables, https://docs.paraview.org/en/latest/UsersGuide/introduction.html#paraview-executables.
 

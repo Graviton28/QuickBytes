@@ -2,7 +2,7 @@
 
 ### A Bit About CASA
 
-[CASA](https://casa.nrao.edu/) is the premier software for reducing radio data coming off of a variety of telescopes around the world, including the Jansky Very Large Array (VLA) and Atacama Large Millimeter Array (ALMA). 
+[CASA](https://casa.nrao.edu/) is the premier software for reducing radio data coming off of a variety of telescopes around the world, including the Jansky Very Large Array (VLA) and Atacama Large Millimeter Array (ALMA).
 
 ### Getting Some Data to Play With
 
@@ -21,8 +21,8 @@ Do we want singleGPU? Can request more nodes obviously. tasks-per-node we don't 
 Might want to create aliases for casa and mpi casa, just to make things quick
 
 ```bash
-alias casa='/users/sbruzew/xena-scratch/casa-blah-blah/bin/casa'
-alias mpicasa='/users/sbruzew/xena-scratch/casa-blah-blah/bin/mpicasa'
+alias casa='/users/sbruzew/easley-scratch/casa-blah-blah/bin/casa'
+alias mpicasa='/users/sbruzew/easley-scratch/casa-blah-blah/bin/mpicasa'
 ```
 
 Actually it doesn't like the alias when you run the command

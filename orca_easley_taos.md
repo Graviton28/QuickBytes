@@ -1,8 +1,8 @@
-## Using Orca on Wheeler and Taos
+## Using Orca on Easley and Taos
 
-### Submitting an Orca script on Wheeler
+### Submitting an Orca script on Easley
 
-Wheeler uses PBS (**P**ortable **B**atch **S**ystem) to submit jobs to the queue for execution. Below is an example script that can be used on Wheeler named `orca_submission.pbs`:
+Easley uses PBS (**P**ortable **B**atch **S**ystem) to submit jobs to the queue for execution. Below is an example script that can be used on Easley named `orca_submission.pbs`:
 
 ```bash
 #!/usr/bin/bash

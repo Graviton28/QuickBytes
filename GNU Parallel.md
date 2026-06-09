@@ -1,18 +1,18 @@
 # GNU Parallel #
-GNU parallel enables us to run as many jobs in parallel instead of sequentially thus saving lots of time. Unlike creating a queue for exectution of processes in a sequential run, GNU parallel tends to maximally parallize the execution over available processors in an embarassingly parallel fashion.
+GNU parallel enables us to run as many jobs in parallel instead of sequentially thus saving lots of time. Unlike creating a queue for execution of processes in a sequential run, GNU parallel tends to maximally parallelize the execution over available processors in an embarrassingly parallel fashion.
 
-For example, a parallel command to change formats of all files with csv extension to .txt using gnu-parallel is presented. 
+For example, a parallel command to change formats of all files with csv extension to .txt using gnu-parallel is presented.
       module load image-magick-7.0.5-9-gcc-4.8.5-python2-xzyy5cz
-      $find . -name "*csv" | parallel -I% --max-args 1 convert % %.txt
+      $ find . -name "*csv" | parallel -I% --max-args 1 convert % %.txt
 
-Here the command finds all the files with .csv extension first and parallely converts them to txt format .
+Here the command finds all the files with .csv extension first and converts them to txt format .
 
-Similarly, parallel can also used to compressed as many files and decompress them.
+Similarly, parallel can also be used to compress and decompress many files.
 
-     $parallel gzip ::: *.txt
-     $parallel gunzip ::: *.gz
-  
-Tha above two commands can be used to zip and unzip image files with .jpg exptesion over given path. 
+     $ parallel gzip ::: *.txt
+     $ parallel gunzip ::: *.gz
+
+The above two commands can be used to compress and decompress files over a given path.
 
 
 
@@ -22,7 +22,7 @@ Tha above two commands can be used to zip and unzip image files with .jpg exptes
 
 GNU Parallel takes many different arguments, but here we will use only two, --arg-file and {}. --arg-file precedes an input file name, “msizes”, and {} is replaced with each line of the input file. A different copy of Matlab is run simultaneously, with each line of the input file replacing {} in each copy. This is Matlab in high-throughput mode (on a single node). Here is the new “parallel matlab” command:
 
-	parallel --arg-file msizes ‘matlab –nojvm –nodisplay –r “msize={};program”' >/dev/null 
+	parallel --arg-file msizes 'matlab -nojvm -nodisplay -r "msize={};program"' >/dev/null
 
 Single quotes are required around the Matlab portion of the parallel Matlab command. The actual Matlab code is enclosed in double quotes. The contents of the input file, msizes, is:
 
@@ -53,11 +53,11 @@ So far, the command has run Matlab in high-throughput mode on only a single node
 	quit
 
 The parent process id is now prepended to the file name. This is helpful because there will now be multiple output files, and they must all have unique names. The command to run Matlab is now:
-		
+
 	parallel -j0 --arg-file msizes 'matlab -nojvm -nodisplay -r "msize={};pid=$PPID;program"' >/dev/null
 
-The $PPID (parent process id#) is input to program.m as the pid variable. The -j0 flag ensures that as many cores as possible on the node are used. Running this command (just as an example, without the PBS batch file) would produce output files: 
-	 
+The $PPID (parent process id#) is input to program.m as the pid variable. The -j0 flag ensures that as many cores as possible on the node are used. Running this command (just as an example, without the PBS batch file) would produce output files:
+
         18778.1.csv 18778.2.csv 18778.3.csv 18778.4.csv.
 
 The contents are the same as before. The command (with some PBS specific modifications) can now be inserted into a PBS batch script in order to run on more than one node, i.e. in high throughput mode.
@@ -115,8 +115,8 @@ To run this job, save the PBS script to a file, e.g. mtest_pbs. Submit the job t
 
 
 
-## Example of running embarassingly parallel jobs in python with parallel
-The usage of gnu-parallel for python tasks is similar to that of matlab. Following are the sample codes showing implementation of gnu-parallel for python tasks. 
+## Example of running embarrassingly parallel jobs in python with parallel
+The usage of gnu-parallel for python tasks is similar to that of matlab. Following are the sample codes showing implementation of gnu-parallel for python tasks.
 
 ### Code for PBS script
 	#!/bin/bash
@@ -132,9 +132,9 @@ The usage of gnu-parallel for python tasks is similar to that of matlab. Followi
 	module load anaconda
 
 	# activate python environment
-	source activate numpy_py3   #you need to have numpy_py3 environment with numpy installed. Refer to Anaconda quickbytes. 
+	source activate numpy_py3   #you need to have numpy_py3 environment with numpy installed. Refer to Anaconda quickbytes.
 
-	# change to directory PBS script was submitted. 
+	# change to directory PBS script was submitted.
 	cd $PBS_O_WORKDIR
 
 	# set jobs per node, which is core per node for galles
