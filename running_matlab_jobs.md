@@ -18,25 +18,26 @@ fname='randnums.csv';
 csvwrite(fname,rmatrix);
 quit
 ```
-This program can be submitted using batch mode with the command `matlab -r my_program`. In this command the `-r` flag is telling MATLAB to run your script `my_program.m` in batch mode. Notice that when calling a script with batch mode you leave off the extension `.m`. This command works if you are running on a local machine, however, when running jobs at CARC you need to submit your job to the job scheduler using a PBS script. For those unfamiliar with PBS scripts explanations and example scripts can be found [here](http://carc.unm.edu/user-support/using-carc-systems/running-jobs/sample-pbs-scripts.html). To submit our MATLAB program to the Wheeler job scheduler we would put our batch command in a PBS script similar to the one below:
+This program can be submitted using batch mode with the command `matlab -r my_program`. In this command the `-r` flag is telling MATLAB to run your script `my_program.m` in batch mode. Notice that when calling a script with batch mode you leave off the extension `.m`. This command works if you are running on a local machine, however, when running jobs at CARC you need to submit your job to the job scheduler using a Slurm script. For those unfamiliar with Slurm scripts explanations and example scripts can be found [here][(https://github.com/UNM-CARC/QuickBytes/blob/master/Intro_to_slurm.md)]. To submit our MATLAB program to the Easley or Hopper job scheduler we would put our batch command in a Slurm script similar to the one below:
 
 ```bash
 #!/bin/bash
 
-# Commands specific to the job scheduler requesting resources, naming your job, and setting up email alerts regarding job status.
-#PBS -l walltime=1:00:00
-#PBS -l nodes=1:ppn=8
-#PBS -N my_matlab_job
-#PBS -m abe
-#PBS -M my_email.@unm.edu
+# Commands specific to the job scheduler requesting resources, naming your job, and setting up email alerts regarding job status      #SBATCH --job-name=my_matlab_job
+#SBATCH --time=1:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=my_email.@unm.edu
+#SBATCH --output=slurm-%j.out
 
-# Change to the directory that you submitted your PBS script from.
-cd $PBS_O_WORKDIR
+# Change to the directory that you submitted your Slurm script from.
+cd "$SLURM_SUBMIT_DIR"
 
 # Loading the MATLAB software module. The specific module name is system dependent.
-module load matlab/R2017a
+module load matlab/R2023a
 
-# Calling MATLAB in batch mode to run your program. 
+# Calling MATLAB in batch mode to run your program.
 matlab -nojvm -nodisplay -r my_program > /dev/null
 ```
 
@@ -45,8 +46,8 @@ There are a couple of additions to our batch mode command when calling MATLAB on
 ```bash
 matlab -nojvm -nodisplay -r my_program > my_program.output
 ```
-Now that you have your program and your PBS script you can submit your job to the job scheduler using the `qsub` command:
+Now that you have your program and your Slurm script you can submit your job to the job scheduler using the `sbatch` command:
 
 ```bash
-qsub my_matlab_job.pbs
+sbatch my_matlab_job.sbatch
 ```
