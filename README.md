@@ -59,9 +59,7 @@ Quickbytes are tutorials designed to help CARC users.
          * [SimCov on Wheeler](https://github.com/UNM-CARC/QuickBytes/blob/master/SimCov.md)
       *  Astronomy
          * [CASA Radio Astronomy](https://github.com/UNM-CARC/QuickBytes/blob/master/mpiCASA.md) 
-      * Paraview
-        * [Paraview Wheeler](https://github.com/UNM-CARC/QuickBytes/blob/master/paraview.md)
-        * [Paraview Hopper](https://github.com/UNM-CARC/QuickBytes/blob/master/Paraview_Hopper.md)
+      * [Paraview](https://github.com/UNM-CARC/QuickBytes/blob/master/paraview.md)
       * [Docker and Singularity](https://github.com/UNM-CARC/QuickBytes/blob/master/singularity-markdown-version.md)
       * [Haskell at CARC](https://github.com/UNM-CARC/QuickBytes/blob/master/haskell.md)
       * [X11 Forwarding](https://github.com/UNM-CARC/QuickBytes/blob/master/X11_forwarding.md)
@@ -97,7 +95,8 @@ These slides were used in CARC workshops. They are provided for your convenience
     * [Parallel Processing with MPI and SLURM 50 min version](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/CS442_50min.pdf)
     * [SLURM, Gaussian, and Abinit](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWorkshopSlurmGaussianAbinit.pdf)
     * [SLURM and Gaussian 1 hr version](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntermediateIntroToCARCWorkshopGaussian_1hr.pdf)
-    * [Intermediate SLURM and StarCCM](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamicsStarCCM2025-0.1.pptx)
+    * [Intermediate SLURM and StarCCM on Hopper](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamicsStarCCM2025-0.1.pptx)
+    * [Intermediate SLURM and StarCCM on Easley](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamicsStarCCM2026Easley-0.1.pptx)
     * [Intermediate SLURM and Machine Learning](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntermediateIntroToCARCWorkshopMachineLearning.pdf)
     * [Intro to CARC with Quantum Computing](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithQuantumComputing2025-0.1.pdf)
     * [Intro to CARC with Computational Fluid Dynamics](https://github.com/UNM-CARC/QuickBytes/blob/master/workshop_slides/IntroToCARCWithComputationalFluidDynamics2025-0.1.pdf) 
