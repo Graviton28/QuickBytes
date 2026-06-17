@@ -26,13 +26,13 @@ Download and install [MobaXterm](https://mobaxterm.mobatek.net). It combines an 
 
 ### 1. Log in to Easley with X11 forwarding enabled
 
-Use the `-Y` flag when connecting via SSH to enable trusted X11 forwarding:
+For Mac, launch XQuartz, then open a terminal from the 'applications' menu. Use the `-Y` flag when connecting via SSH to enable trusted X11 forwarding:
 
 ```bash
 ssh -Y username@easley.alliance.unm.edu
 ```
 
-> **Note:** `-Y` (trusted forwarding) is recommended over `-X` (untrusted forwarding) as it works more reliably across different system configurations. Also note that X11 forwarding requires a native terminal with XQuartz (Mac) or MobaXterm (Windows) — it will not work from the OOD web terminal at ood.alliance.unm.edu.
+> **Note:** `-Y` (trusted forwarding) is recommended over `-X` (untrusted forwarding) as it works more reliably across different system configurations, but if one doesn't work, try the other. Also note that X11 forwarding requires a native terminal with XQuartz (Mac) or MobaXterm (Windows) — it will not work from the OOD web terminal at ood.alliance.unm.edu.
 
 If you get the error `"/usr/bin/xauth: file /users/user/.Xauthority does not exist"`, run:
 
