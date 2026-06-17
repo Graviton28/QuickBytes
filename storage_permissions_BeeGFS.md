@@ -250,6 +250,8 @@ Then verify:
 ls -l
 ```
 
+Alternatively, you can change both the user and group owner at once with `chown`:
+
 ```bash
 chown -R jsmith:smith12345 mydata
 ```
@@ -416,5 +418,7 @@ Remember:
 - `scp` does not provide a reliable way to set destination group ownership.
 - Windows transfer tools may require a follow-up `chgrp`.
 - When in doubt, check with `ls -l` before starting a large job.
-- When using chgrp make sure to copy your data in chunks where each chunk is smaller than your remaining personal scratch quota. 
-- You can always check your quotas with the "quotas" command
+- When using `chgrp`, make sure to copy your data in chunks where each chunk is smaller than your remaining personal scratch quota.
+- You can always check your quotas with the `quotas` command.
+
+*This quickbyte was validated on 6/17/2026*
