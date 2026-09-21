@@ -2,7 +2,7 @@
 
 Apache Spark is a distributed computing framework for processing large data sets, generally easier to program than something like MPI. You write a single Python (or Java/Scala) program that coordinates parallel work across many worker processes.
 
-This tutorial assumes you're comfortable with Slurm, modules, and HPC basics, but new to Spark. Each step explains *why* it's needed — Spark's main complication on a shared HPC cluster isn't writing Spark code, it's standing up your own personal Spark cluster inside Slurm's allocation system. The one file you need from this repo, `slurm-spark-submit`, is at <https://github.com/Graviton28/QuickBytes/tree/master/spark> — everything else below you create yourself with a `cat` command as you go.
+This tutorial assumes you're comfortable with Slurm, modules, and HPC basics, but new to Spark. Each step explains *why* it's needed — Spark's main complication on a shared HPC cluster isn't writing Spark code, it's standing up your own personal Spark cluster inside Slurm's allocation system. The one file you need from this repo, `slurm-spark-submit`, is at <https://github.com/UNM-CARC/QuickBytes/tree/master/spark> — everything else below you create yourself with a `cat` command as you go.
 
 ---
 
