@@ -90,7 +90,7 @@ Spark standalone clusters normally expect fixed, known hostnames — you SSH to 
 2. Asks Slurm for the current node list: `scontrol show hostnames "$SLURM_JOB_NODELIST"`.
 3. Starts the master directly on the first node.
 4. SSHes into every allocated node and starts a worker — explicitly passing `SPARK_HOME`, `JAVA_HOME`, `SPARK_DIST_CLASSPATH`, and `PYSPARK_PYTHON` into each session, since a fresh `ssh` session doesn't inherit your shell's environment. Skip this and every worker hits the same classpath and Python errors all over again.
-5. Redirects all Spark logs/work/pid directories to `/tmp/spark-$SLURM_JOB_ID/`, since the shared Spark install directory is read-only.
+5. Redirects all Spark logs/work/pid directories to `/tmp/spark-$SLURM_JOB_ID/`, since the shared Spark install directory is read-only. It also gives the master and workers a private copy of Spark's `log4j2.properties.template` as their log config. The shared install ships only the template, and without a real `log4j2.properties` the daemons log errors only.
 6. If you pass it a script, runs it with `spark-submit` and tears the cluster down afterward (for use inside `sbatch`). If not, it leaves the cluster running for interactive use and prints the master URL.
 
 ---
@@ -227,7 +227,7 @@ salloc --nodes=2 --ntasks-per-node=1 --cpus-per-task=4 --mem=16G --time=00:30:00
 
 Nothing else changes — the script re-queries Slurm's node list every run, so it scales from 1 to N nodes with no edits.
 
-One quirk on this Spack build: master/worker `.out` logs in `/tmp/spark-$SLURM_JOB_ID/logs/` may show only the Java launch line with nothing after it. That's a logging config quirk, not a failure. Verify health with process/port checks instead:
+Each node keeps its own Spark logs in `/tmp/spark-$SLURM_JOB_ID/logs/` on that node, and the master and worker logs show normal startup messages. You can also check health with process and port checks:
 ```bash
 ps aux | grep -E "Master|Worker" | grep -v grep
 ss -tlnp | grep 7077
@@ -296,10 +296,9 @@ Since the dataset is generated with a fixed seed, the counts are deterministic �
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| `NoClassDefFoundError: org/slf4j/Logger` | Default `module load spark` loads the Hadoop-less `sewd` build | `module load spark/3.5.1-kn2k` |
+| `start-master.sh: No such file or directory` (earlier: `NoClassDefFoundError: org/slf4j/Logger`) | Default `module load spark` loads the `sewd` build, whose install directory no longer exists | `module load spark/3.5.1-kn2k` |
 | Spark scripts can't find their install | Module sets `$SPARK_ROOT`, not `$SPARK_HOME` | `export SPARK_HOME=$SPARK_ROOT` |
 | `PYTHON_VERSION_MISMATCH` | conda env Python ≠ system Python (3.9) used by workers | Set both `PYSPARK_PYTHON` and `PYSPARK_DRIVER_PYTHON` |
-| Worker/master logs look empty | Logging config quirk in this build | Check `ps aux` / `ss -tlnp` instead of logs |
 -->
 
 ---

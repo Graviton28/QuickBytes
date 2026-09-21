@@ -63,11 +63,19 @@ export SPARK_PID_DIR="$SPARK_SCRATCH/pids"
 
 mkdir -p "$SPARK_LOG_DIR" "$SPARK_WORKER_DIR" "$SPARK_LOCAL_DIRS" "$SPARK_PID_DIR"
 
+# The shared Spark conf directory is read-only and only ships a
+# log4j2.properties.template, so without a real log4j2.properties the master and
+# worker daemons log errors only. Give the daemons (not spark-submit) a private
+# conf directory that uses the template.
+SPARK_DAEMON_CONF="$SPARK_SCRATCH/conf"
+mkdir -p "$SPARK_DAEMON_CONF"
+cp "${SPARK_HOME}/conf/log4j2.properties.template" "$SPARK_DAEMON_CONF/log4j2.properties"
+
 # ---------------------------------------------------------------------------
 # Start the master directly on the current node
 # ---------------------------------------------------------------------------
 echo "Starting Spark master on ${MASTER_HOST}..."
-"${SPARK_HOME}/sbin/start-master.sh" \
+SPARK_CONF_DIR="$SPARK_DAEMON_CONF" "${SPARK_HOME}/sbin/start-master.sh" \
     --host "$MASTER_HOST" \
     --port "$MASTER_PORT"
 
@@ -97,6 +105,9 @@ while IFS= read -r node; do
         export SPARK_WORKER_DIR='${SPARK_WORKER_DIR}'
         export SPARK_LOCAL_DIRS='${SPARK_LOCAL_DIRS}'
         export SPARK_PID_DIR='${SPARK_PID_DIR}'
+        mkdir -p '${SPARK_DAEMON_CONF}'
+        cp '${SPARK_HOME}/conf/log4j2.properties.template' '${SPARK_DAEMON_CONF}/log4j2.properties'
+        export SPARK_CONF_DIR='${SPARK_DAEMON_CONF}'
         '${SPARK_HOME}/sbin/start-worker.sh' \
             --cores '${CORES_PER_NODE}' \
             --memory '${MEM_MB}m' \
