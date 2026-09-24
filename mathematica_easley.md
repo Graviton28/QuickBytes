@@ -370,8 +370,6 @@ Exit[]
 
 Replace `<insert-license-server-here>` with the hostname of the server you want, and `MMA_LICENSE_SERVER` becomes an ordinary variable you can set in your Slurm script, so different jobs (or different users) can point at different servers without anyone changing the shared install. `$LicenseServer` and `$MaxLicenseProcesses`/`$MaxLicenseSubprocesses` in the output confirm which server and limits you actually got.
 
-Use the `WolframKernel` binary directly here, not `wolframscript` — `wolframscript`'s own `-pwfile` flag doesn't reliably switch servers. `WolframKernel` (the same binary the multi-CPU and multi-node examples above use for worker kernels) does.
-
 ---
 
 ## Further Reading
