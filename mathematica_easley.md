@@ -351,6 +351,32 @@ A difference of `0.` means the GPU and CPU answers agree exactly.
 
 ---
 
+## Step 7: Choosing a License Server
+
+If your group has access to more than one Mathematica license server, you can pick which one a job uses by writing a one-line license file and pointing the kernel at it with `-pwfile`:
+
+```bash
+export MMA_LICENSE_SERVER=<insert-license-server-here>
+
+WK=/opt/local/mathematica/15.0.1/SystemFiles/Kernel/Binaries/Linux-x86-64/WolframKernel
+echo "!$MMA_LICENSE_SERVER" > mathpass_choice
+
+"$WK" -pwfile "$PWD/mathpass_choice" -noinit -run '
+Print["Using license server: ", $LicenseServer];
+Print["Max processes/subprocesses: ", {$MaxLicenseProcesses, $MaxLicenseSubprocesses}];
+Print[Integrate[x^2, x]];
+Exit[]
+'
+```
+
+Replace `<insert-license-server-here>` with the hostname of the server you want, and `MMA_LICENSE_SERVER` becomes an ordinary variable you can set in your Slurm script, so different jobs (or different users) can point at different servers without anyone changing the shared install. `$LicenseServer` and `$MaxLicenseProcesses`/`$MaxLicenseSubprocesses` in the output confirm which server and limits you actually got.
+
+**Use the `WolframKernel` binary directly, not `wolframscript`.** We tested `wolframscript -pwfile <file> -local -code '...'` against two different license servers and it kept reporting the same server both times, ignoring `-pwfile`, regardless of whether the path was relative or absolute. Calling `WolframKernel` directly (the same binary the multi-CPU and multi-node examples above already use for worker kernels) picks up `-pwfile` correctly every time. This is the one thing worth remembering if you build on this pattern.
+
+No changes to the shared install are needed for this to work; `-pwfile` is a standard `WolframKernel` option, and any user can write their own one-line license file.
+
+---
+
 ## Further Reading
 
 - Wolfram Language documentation: <https://reference.wolfram.com/language/>
