@@ -370,9 +370,7 @@ Exit[]
 
 Replace `<insert-license-server-here>` with the hostname of the server you want, and `MMA_LICENSE_SERVER` becomes an ordinary variable you can set in your Slurm script, so different jobs (or different users) can point at different servers without anyone changing the shared install. `$LicenseServer` and `$MaxLicenseProcesses`/`$MaxLicenseSubprocesses` in the output confirm which server and limits you actually got.
 
-**Use the `WolframKernel` binary directly, not `wolframscript`.** We tested `wolframscript -pwfile <file> -local -code '...'` against two different license servers and it kept reporting the same server both times, ignoring `-pwfile`, regardless of whether the path was relative or absolute. Calling `WolframKernel` directly (the same binary the multi-CPU and multi-node examples above already use for worker kernels) picks up `-pwfile` correctly every time. This is the one thing worth remembering if you build on this pattern.
-
-No changes to the shared install are needed for this to work; `-pwfile` is a standard `WolframKernel` option, and any user can write their own one-line license file.
+Use the `WolframKernel` binary directly here, not `wolframscript` — `wolframscript`'s own `-pwfile` flag doesn't reliably switch servers. `WolframKernel` (the same binary the multi-CPU and multi-node examples above use for worker kernels) does.
 
 ---
 
