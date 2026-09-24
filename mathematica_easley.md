@@ -250,7 +250,6 @@ If[Length[Kernels[]] != Length[nodes], Exit[1]];
 Print["Workers: ", ParallelEvaluate[{$KernelID, $MachineName}]];
 Print["Primes: ", ParallelTable[Prime[i], {i, 1, 20}]];
 
-(* Explicit shutdown lets both Slurm worker steps exit successfully. *)
 Scan[LinkWrite[#, Unevaluated[EvaluatePacket[Quit[0]]]] &, links];
 TimeConstrained[
     While[AnyTrue[processes, ProcessStatus[#] === "Running" &], Pause[0.1]],
