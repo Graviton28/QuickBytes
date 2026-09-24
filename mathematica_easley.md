@@ -2,7 +2,7 @@
 
 Mathematica is a symbolic and numerical computing system built on the Wolfram Language. It can do algebra, calculus, linear algebra, statistics, optimization, and plotting in one environment, and it gives exact symbolic answers (like `x/2 - Sin[2x]/4`) as well as floating-point ones.
 
-If you are unfamiliar with Mathematica, see the Wolfram [Mathematica page](https://www.wolfram.com/mathematica/) for more information. This tutorial assumes you can log in to Easley and submit [Slurm jobs](https://github.com/UNM-CARC/QuickBytes/blob/master/Intro_to_slurm.md), but have not used Mathematica on a cluster before. On Easley you use Mathematica through `wolframscript`, the command-line interface. There is no notebook window. You give it Wolfram Language code, run it in a Slurm job, and read the text it prints. The four example job scripts below (serial, multi-CPU, multi-node, and GPU) are based on scripts provided by CARC staff, and every command and output was run on Easley with Mathematica 15.0.1.
+If you are unfamiliar with Mathematica, see the Wolfram [Mathematica page](https://www.wolfram.com/mathematica/) for more information. This tutorial assumes you can log in to Easley and submit [Slurm jobs](https://github.com/UNM-CARC/QuickBytes/blob/master/Intro_to_slurm.md), but have not used Mathematica on a cluster before. On Easley you use Mathematica through `wolframscript`, the command-line interface. There is no notebook window. You give it Wolfram Language code, run it in a Slurm job, and read the text it prints.
 
 ---
 
