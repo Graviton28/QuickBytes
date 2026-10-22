@@ -29,7 +29,7 @@ Under "Use your organizational login", search for and select "University of New 
 
 #### 2. Allow UNM to share your information
 
-UNM will ask permission to send your name and email to CILogon, which Globus uses to verify university logins. Select "Ask me again if information to be provided to this service changes" so you are not asked every time, then click "Accept".
+UNM will ask permission to send your name and email to CILogon, which Globus uses to verify university logins. Choose one of the consent options and click "Accept".
 
 ![](/Images/globus-img3.png)
 
