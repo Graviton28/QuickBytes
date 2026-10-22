@@ -83,7 +83,7 @@ In the File Manager, click the middle "Panels" button in the top right to show t
 
 #### 2. Choose the source and destination
 
-In the left panel, select the source collection and path — here, "UNM CARC home" at `/users/hfricke/testing/gaussian_review/`. In the right panel, search for the destination collection and enter a path — here, "UNM CARC scratch" at `/carc/scratch/users/hfricke/`.
+In the left panel, select the source collection and path — here, "UNM CARC home" at `/users/your-user-name/testing/gaussian_review/`. In the right panel, search for the destination collection and enter a path — here, "UNM CARC scratch" at `/carc/scratch/users/your-user-name/`.
 
 ![](/Images/globus-img13.png)
 
