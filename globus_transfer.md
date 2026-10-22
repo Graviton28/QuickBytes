@@ -1,14 +1,14 @@
 # Transferring data with Globus
 
-Globus is a web-based file transfer service built for moving research data quickly and reliably. Instead of keeping a terminal open for `scp` or `rsync`, you pick a source and a destination in your web browser and Globus handles the transfer in the background — retrying on failure, verifying file integrity, and emailing you when it's done. You can close your browser while a transfer runs.
+Globus is a web-based file transfer service. Instead of using `scp` or `rsync` in a terminal, you choose a source and a destination in your web browser, and Globus runs the transfer in the background. Globus retries failed transfers, verifies file integrity, and sends you an email when the transfer is done. You can close your browser while a transfer is running.
 
-CARC provides three Globus collections, one for each of the main storage areas described in our [storage and backup QuickByte](https://github.com/UNM-CARC/QuickBytes/blob/master/storage_and_backup.md):
+CARC has three Globus collections, one for each of the main storage areas described in the [storage and backup QuickByte](https://github.com/UNM-CARC/QuickBytes/blob/master/storage_and_backup.md):
 
 * **UNM CARC home** - your home directory, `/users/your-user-name/`
 * **UNM CARC projects** - your project directories
 * **UNM CARC scratch** - your scratch directory, `/carc/scratch/users/your-user-name/`
 
-This QuickByte walks through setting up Globus for the first time and then transferring files between two of these collections. For transferring files between CARC and your own computer with `scp` or `rsync`, see the [transferring data QuickByte](https://github.com/UNM-CARC/QuickBytes/blob/master/transfer_data.md).
+This QuickByte covers setting up Globus for the first time and transferring files between two of these collections. To transfer files between CARC and your own computer with `scp` or `rsync`, see the [transferring data QuickByte](https://github.com/UNM-CARC/QuickBytes/blob/master/transfer_data.md).
 
 * Globus Web App: https://app.globus.org
 * Globus Documentation: https://docs.globus.org
@@ -23,39 +23,39 @@ Go to [app.globus.org](https://app.globus.org). You can also get there from the 
 
 ![](/Images/globus-img1.png)
 
-Under "Use your organizational login", search for and select "University of New Mexico", then click "Continue". This will take you to the familiar UNM login page, where you log in with your UNM NetID and password.
+Under "Use your organizational login", search for and select "University of New Mexico", then click "Continue". You will be sent to the UNM login page. Log in with your UNM NetID and password.
 
 ![](/Images/globus-img2.png)
 
 #### 2. Allow UNM to share your information
 
-UNM will ask permission to send your name and email to CILogon, the service Globus uses to verify university logins. Select "Ask me again if information to be provided to this service changes" so you aren't asked every time, then click "Accept".
+UNM will ask permission to send your name and email to CILogon, which Globus uses to verify university logins. Select "Ask me again if information to be provided to this service changes" so you are not asked every time, then click "Accept".
 
 ![](/Images/globus-img3.png)
 
 #### 3. Create your Globus account
 
-Since this is your first time logging in, Globus will offer to link to an existing Globus account. Unless you've used Globus before with a different login, click "Continue".
+The first time you log in, Globus will ask if you want to link to an existing Globus account. If you have not used Globus before, click "Continue".
 
 ![](/Images/globus-img4.png)
 
-Check the box agreeing to the Terms of Service and Privacy Policy, then click "Continue".
+Check the box to agree to the Terms of Service and Privacy Policy, then click "Continue".
 
 ![](/Images/globus-img5.png)
 
 #### 4. Allow the Globus Web App
 
-Click "Allow" so the Globus Web App can manage transfers on your behalf.
+Click "Allow" to let the Globus Web App manage your transfers.
 
 ![](/Images/globus-img6.png)
 
-You should now see the Globus Dashboard. The menu on the left side of the page is how you get around Globus — the two pages we'll use are "File Manager" and "Activity".
+You should now see the Globus Dashboard. Use the menu on the left side of the page to move between pages. This QuickByte uses the "File Manager" and "Activity" pages.
 
 ![](/Images/globus-img7.png)
 
 #### 5. Link your CARC identity
 
-Logging in with your UNM account gets you into Globus, but to access files on CARC systems Globus also needs to know your CARC username. Click "File Manager" on the left, then click the "Collection" search bar and search for "UNM CARC". Select any of the three CARC collections — "UNM CARC projects" in the example below. Globus will say that authentication/consent is required. Click "Continue".
+Your UNM account logs you in to Globus, but Globus also needs your CARC username to access files on CARC systems. Click "File Manager" on the left, click the "Collection" search bar, and search for "UNM CARC". Select any of the three CARC collections. The example below uses "UNM CARC projects". Globus will say that authentication/consent is required. Click "Continue".
 
 ![](/Images/globus-img8.png)
 
@@ -63,43 +63,43 @@ Click "Link a UNM CARC (carc.unm.edu) identity" and log in with your CARC userna
 
 ![](/Images/globus-img9.png)
 
-Once you've logged in, click "Allow".
+After you log in, click "Allow".
 
 ![](/Images/globus-img10.png)
 
-The first time you open each of the other CARC collections, Globus may ask you to authenticate again. Since your CARC identity is now linked, just click "Use my your-user-name@carc.unm.edu identity".
+The first time you open each of the other CARC collections, Globus may ask you to authenticate again. Click "Use my your-user-name@carc.unm.edu identity".
 
 ![](/Images/globus-img11.png)
 
-Once linked, the collection will show your files, just like `ls` would on the cluster. You can type a directory into the "Path" bar to jump straight to it.
+The collection will now show your files. To go to a specific directory, type its path into the "Path" bar.
 
 ![](/Images/globus-img12.png)
 
 ## Transferring files between CARC collections
 
-The example below copies files from a directory in home to scratch, but the same steps work for any combination of the three CARC collections.
+The example below copies files from a directory in home to scratch. The same steps work for any two of the CARC collections.
 
 #### 1. Open the two-panel view
 
-In the File Manager, click the middle "Panels" button in the top right to show two collections side by side. The left panel will keep whatever collection you already had open.
+In the File Manager, click the middle "Panels" button in the top right to show two collections side by side. The left panel keeps the collection you already had open.
 
 ![](/Images/globus-img13.png)
 
 #### 2. Choose the source and destination
 
-In the left panel, select the source collection and path — here, "UNM CARC home" at `/users/your-user-name/testing/gaussian_review/`. In the right panel, search for the destination collection and enter a path — here, "UNM CARC scratch" at `/carc/scratch/users/your-user-name/`.
+In the left panel, select the source collection and path. In this example, that is "UNM CARC home" at `/users/your-user-name/testing/gaussian_review/`. In the right panel, search for the destination collection and enter a path. In this example, that is "UNM CARC scratch" at `/carc/scratch/users/your-user-name/`.
 
 ![](/Images/globus-img14.png)
 
 #### 3. Review the transfer options (optional)
 
-Clicking "Transfer & Timer Options" shows extra settings for the transfer. The defaults are fine for most transfers. A few that are useful to know:
+Click "Transfer & Timer Options" to see more settings for the transfer. The defaults work for most transfers. Some useful options are:
 
-* **apply sync level** - only copies files that are new or have changed on the source, similar to `rsync`. Useful for re-running the same transfer after some of your files change.
+* **apply sync level** - only copies files that are new or have changed on the source, similar to `rsync`. This is useful when you run the same transfer again after some files have changed.
 * **preserve source file modification times** - by default, copied files get the time of the transfer as their modification time.
-* **Schedule Start / Repeat** - start the transfer later, or repeat it on a schedule.
+* **Schedule Start / Repeat** - start the transfer at a later time, or repeat it on a schedule.
 
-Note that file integrity verification and encryption are both on by default, and encryption is required by the CARC collections.
+File integrity verification and encryption are both on by default. The CARC collections require encryption.
 
 ![](/Images/globus-img15.png)
 
@@ -107,7 +107,7 @@ Note that file integrity verification and encryption are both on by default, and
 
 Check the boxes next to the files or folders you want to transfer, or click "select all".
 
-Next, click the "Start" button on the **origin** side, above the panel you are transferring **from**. Each "Start" button sends files away from its own panel, so in this example the left "Start" button sends files from home (left) to scratch (right). Clicking the "Start" button on the destination side won't transfer the files you selected.
+Click the "Start" button on the origin side, above the panel you are transferring from. Each "Start" button sends files from its own panel to the other panel. In this example, the left "Start" button sends files from home (left) to scratch (right). Clicking the "Start" button on the destination side will not transfer the files you selected.
 
 A green "Transfer request submitted successfully" message will appear.
 
@@ -115,17 +115,17 @@ A green "Transfer request submitted successfully" message will appear.
 
 #### 5. Check on the transfer
 
-Click "View details" on the green message, or "Activity" on the left menu, to see the status of your transfer. Large transfers can take a while — you don't need to keep the page open.
+Click "View details" on the green message, or click "Activity" on the left menu, to see the status of your transfer. Large transfers can take a long time, and you do not need to keep the page open.
 
 ![](/Images/globus-img17.png)
 
-Globus will also email you when the transfer finishes, with a summary of what was transferred.
+Globus will also send you an email with a summary when the transfer finishes.
 
 ![](/Images/globus-img18.png)
 
 #### 6. Refresh the destination
 
-The destination panel does **not** update on its own — even after the transfer has finished, it will still show the folder as it was before. Back in the File Manager, click "refresh list" on the destination panel to see your transferred files.
+The destination panel does not update on its own. After the transfer finishes, it will still show the folder as it was before the transfer. Click "refresh list" on the destination panel to see your transferred files.
 
 ![](/Images/globus-img19.png)
 
