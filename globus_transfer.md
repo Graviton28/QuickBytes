@@ -39,41 +39,31 @@ The first time you log in, Globus will ask if you want to link to an existing Gl
 
 ![](/Images/globus-img4.png)
 
-Check the box to agree to the Terms of Service and Privacy Policy, then click "Continue".
+Check the box to agree to the Terms of Service and Privacy Policy, click "Continue", and click "Allow" when prompted.
 
 ![](/Images/globus-img5.png)
 
-#### 4. Allow the Globus Web App
-
-Click "Allow" to let the Globus Web App manage your transfers.
+You should now see the Globus Dashboard. Use the menu on the left side of the page to move between pages. This QuickByte uses the "File Manager" and "Activity" pages.
 
 ![](/Images/globus-img6.png)
 
-You should now see the Globus Dashboard. Use the menu on the left side of the page to move between pages. This QuickByte uses the "File Manager" and "Activity" pages.
-
-![](/Images/globus-img7.png)
-
-#### 5. Link your CARC identity
+#### 4. Link your CARC identity
 
 Your UNM account logs you in to Globus, but Globus also needs your CARC username to access files on CARC systems. Click "File Manager" on the left, click the "Collection" search bar, and search for "UNM CARC". Select any of the three CARC collections. The example below uses "UNM CARC projects". Globus will say that authentication/consent is required. Click "Continue".
 
+![](/Images/globus-img7.png)
+
+Click "Link a UNM CARC (carc.unm.edu) identity", log in with your CARC username and password, and click "Allow" when prompted.
+
 ![](/Images/globus-img8.png)
-
-Click "Link a UNM CARC (carc.unm.edu) identity" and log in with your CARC username and password.
-
-![](/Images/globus-img9.png)
-
-After you log in, click "Allow".
-
-![](/Images/globus-img10.png)
 
 The first time you open each of the other CARC collections, Globus may ask you to authenticate again. Click "Use my your-user-name@carc.unm.edu identity".
 
-![](/Images/globus-img11.png)
+![](/Images/globus-img9.png)
 
 The collection will now show your files. To go to a specific directory, type its path into the "Path" bar.
 
-![](/Images/globus-img12.png)
+![](/Images/globus-img10.png)
 
 ## Transferring files between CARC collections
 
@@ -83,13 +73,13 @@ The example below copies files from a directory in home to scratch. The same ste
 
 In the File Manager, click the middle "Panels" button in the top right to show two collections side by side. The left panel keeps the collection you already had open.
 
-![](/Images/globus-img13.png)
+![](/Images/globus-img11.png)
 
 #### 2. Choose the source and destination
 
 In the left panel, select the source collection and path. In this example, that is "UNM CARC home" at `/users/your-user-name/testing/gaussian_review/`. In the right panel, search for the destination collection and enter a path. In this example, that is "UNM CARC scratch" at `/carc/scratch/users/your-user-name/`.
 
-![](/Images/globus-img14.png)
+![](/Images/globus-img12.png)
 
 #### 3. Review the transfer options (optional)
 
@@ -101,7 +91,7 @@ Click "Transfer & Timer Options" to see more settings for the transfer. The defa
 
 File integrity verification and encryption are both on by default. The CARC collections require encryption.
 
-![](/Images/globus-img15.png)
+![](/Images/globus-img13.png)
 
 #### 4. Select files and start the transfer
 
@@ -111,22 +101,22 @@ Click the "Start" button on the origin side, above the panel you are transferrin
 
 A green "Transfer request submitted successfully" message will appear.
 
-![](/Images/globus-img16.png)
+![](/Images/globus-img14.png)
 
 #### 5. Check on the transfer
 
 Click "View details" on the green message, or click "Activity" on the left menu, to see the status of your transfer. Large transfers can take a long time, and you do not need to keep the page open.
 
-![](/Images/globus-img17.png)
+![](/Images/globus-img15.png)
 
 Globus will also send you an email with a summary when the transfer finishes.
 
-![](/Images/globus-img18.png)
+![](/Images/globus-img16.png)
 
 #### 6. Refresh the destination
 
 The destination panel does not update on its own. After the transfer finishes, it will still show the folder as it was before the transfer. Click "refresh list" on the destination panel to see your transferred files.
 
-![](/Images/globus-img19.png)
+![](/Images/globus-img17.png)
 
 *This quickbyte was validated on 10/22/2026*
